@@ -13,11 +13,6 @@ if [ -n "$output" ]; then
   git commit -m "Auto Format"
   # Prevent looping by not pushing changes in response to changes from cloudpossebot
   [[ $SENDER ==  "cloudpossebot" ]] || git push
-  # Set status to fail, because the push should trigger another status check,
-  # and we use success to indicate the checks are finished.
-  printf "::set-output name=%s::%s\n" "changed" "true"
-  exit 1
 else
-  printf "::set-output name=%s::%s\n" "changed" "false"
   echo "No changes detected"
 fi
