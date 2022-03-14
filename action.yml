@@ -3,7 +3,7 @@ description: "Automaticaly open a pull request to update context.tf for Terrafor
 inputs:
   app_checkout_path:
     description: 'The path to checkout the application repository to during the workflow run'
-    default: github-action-terraform-auto-format
+    default: github-action-auto-format
     required: false
   base-ref:
     description: "Name of the branch into which this PR wants to merge"
@@ -33,7 +33,7 @@ runs:
     - name: "Checkout github-action-terraform-auto-format repo to load script locally on runner"
       uses: actions/checkout@v2
       with:
-        repository: cloudposse/github-action-terraform-auto-format
+        repository: cloudposse/github-action-auto-format
         path: ${{ inputs.app_checkout_path }}
 
     - name: Amend .gitignore
