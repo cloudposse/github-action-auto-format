@@ -28,8 +28,8 @@
 
 -->
 
-Github Action Auto-format adds all of cloud Posse's standard repository files to a repo, via a commit to a newly-opened pull request.
-It will also rebuild a repo's README.md file, if requested.
+Github Action Auto-format adds all of Cloud Posse's standard repository files to a repo, formats all terraform files in the repo, and updates the repo's README.md file, via a commit to a newly-opened pull request.
+It is possible to run just the README functionality, separately from everything else, depending on the chosen value of the `script-name` input.
 
 ---
 
@@ -67,6 +67,9 @@ It's 100% Open Source and licensed under the [APACHE2](LICENSE).
 
 Copy the `sample_workflow_file.yaml` file from this repository into the `.github/workflows` folder of the repository to which you'd like to add Auto-format functionality.
 This will cause Auto-format functionality to execute on pull requests.
+This is an exhaustive list of all valid `script-name`s:
+  - `terraform`
+  - `readme`
 
 
 
