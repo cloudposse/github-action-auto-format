@@ -68,7 +68,7 @@ description: |-
   Github Action Auto-format runs several repository "hygeine"-related tasks:
   - It adds all of Cloud Posse's standard repository files to a repo, if they're missing. This includes all of our standard Github Actions workflows and several other files that assist in maintaining the repo, such as [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners).
   - It formats all terraform files in the repo, if needed, by running `terraform fmt` on the repository's files.
-  - And it updates the repo's README.md file, by rebuilding it using `README.yaml` as a template and processing it with our README builder.
+  - And it updates the repo's `README.md` file, by rebuilding it using `README.yaml` as a template and processing it with our README builder.
 
   If any of these operations lead to changes in the code, a new commit will be added to the pull request that triggered this action. 
 
@@ -79,7 +79,7 @@ description: |-
 
 # How to use this project
 usage: |-
-  Copy the `sample_workflow_file.yaml` file from this repository into the `.github/workflows` folder of the repository to which you'd like to add Auto-format functionality.
+  Copy the `sample_workflow_file.yml` file from this repository into the `.github/workflows` folder of the repository to which you'd like to add Auto-format functionality.
   This will cause Auto-format functionality to execute on pull requests.
   This is an exhaustive list of all valid `script-name`s:
     - `terraform`
