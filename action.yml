@@ -25,13 +25,7 @@ runs:
       uses: actions/checkout@v2
       with:
         ref: ${{ github.event.pull_request.head.ref }}
-        token: ${{ inputs.token }}
-
-#    - name: "Determine required Terraform version"
-#      uses: cloudposse/github-action-terraform-ci/actions/utilities/determine-terraform-version@main
-#      with:
-#        base-ref: ${{ inputs.base-ref }}
-#        labels: ${{ inputs.labels }}
+        #token: ${{ inputs.token }}
 
     # Assets that are checked out as part of an action are not mounted into subsequent container steps.
     # Therefore, we need to checkout the action code within the workdir to access it within the container steps.
@@ -40,24 +34,6 @@ runs:
       with:
         repository: cloudposse/github-action-auto-format
         path: ${{ inputs.app_checkout_path }}
-
-#    - name: Amend .gitignore
-#      shell: bash
-#      run: |
-#        # Add $ACTION_PATH to .gitignore, so it won't accidentally get committed to the calling repo
-#        echo "**/${ACTION_PATH}/" >> .gitignore
-#      env:
-#        ACTION_PATH: ${{ inputs.app_checkout_path }}
-
-#    - name: Debug
-#      shell: bash
-#      run: |
-#        pwd
-#        echo "pwd - $(pwd)"
-#        echo "SENDER - $SENDER"
-#        echo "GITHUB_ACTION_PATH - $GITHUB_ACTION_PATH"
-#      env:
-#        SENDER: ${{ github.event.sender.login }}
 
     # Format files and commit changes (if any) to the PR branch
     - name: "Format files and commit changes (if any)"
