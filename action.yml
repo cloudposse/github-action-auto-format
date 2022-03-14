@@ -1,0 +1,73 @@
+name: "github-action-terraform-auto-format"
+description: "Automaticaly open a pull request to update context.tf for Terraform projects"
+inputs:
+  app_checkout_path:
+    description: 'The path to checkout the application repository to during the workflow run'
+    default: github-action-terraform-auto-format
+    required: false
+  base-ref:
+    description: "Name of the branch into which this PR wants to merge"
+    required: true
+  labels:
+    description: "Labels on this PR, including associated metadata"
+    required: true
+  token:
+    description: "github token"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    # Checkout repo
+    - name: "Checkout commit"
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.ref }}
+        token: ${{ inputs.token }}
+
+    - name: "Determine required Terraform version"
+      uses: cloudposse/github-action-terraform-ci/actions/utilities/determine-terraform-version@main
+      with:
+        base-ref: ${{ inputs.base-ref }}
+        labels: ${{ inputs.labels }}
+
+    - name: "Checkout github-action-terraform-auto-format repo to load script locally on runner"
+      uses: actions/checkout@v2
+      with:
+        repository: cloudposse/github-action-terraform-auto-format
+        path: ${{ inputs.app_checkout_path }}
+
+    - name: Amend .gitignore
+      shell: bash
+      run: |
+        # Add $ACTION_PATH to .gitignore, so it won't accidentally get committed to the calling repo
+        echo "**/${ACTION_PATH}/" >> .gitignore
+      env:
+        ACTION_PATH: ${{ inputs.app_checkout_path }}
+
+    - name: Debug
+      shell: bash
+      run: |
+        pwd
+        echo "pwd - $(pwd)"
+        echo "CHANGED - ${CHANGED}"
+        echo "SENDER - $SENDER"
+        echo "GITHUB_ACTION_PATH - $GITHUB_ACTION_PATH"
+      env:
+        CHANGED: ${{ steps.commit.outputs.changed }}
+        SENDER: ${{ github.event.sender.login }}
+
+    # Format files and commit changes (if any) to the PR branch
+    - name: "Format files and commit changes (if any)"
+      uses: docker://cloudposse/build-harness:latest
+      with:
+        entrypoint: ${{ github.action_path }}/terraform.sh
+      env:
+        SENDER: ${{ github.event.sender.login }}
+
+    # Rebuild README and commit changes (if any) to the PR branch
+    - name: "Rebuild README and commit changes (if any)"
+      uses: docker://cloudposse/build-harness:latest
+      with:
+        entrypoint: ${{ github.action_path }}/readme.sh
+      env:
+        SENDER: ${{ github.event.sender.login }}
