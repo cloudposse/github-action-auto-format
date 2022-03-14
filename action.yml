@@ -1,21 +1,12 @@
-name: "github-action-terraform-auto-format"
-description: "Automaticaly open a pull request to update context.tf for Terraform projects"
+name: "github-action-auto-format"
+description: "Run auto-formatting functionality ofr different aspects of a repo. (See scripts for details.)"
 inputs:
-  app_checkout_path:
-    description: 'The path to checkout the application repository to during the workflow run'
+  app-checkout-path:
+    description: 'The path to checkout the action scripts to at runtime'
     default: github-action-auto-format
     required: false
-  base-ref:
-    description: "Name of the branch into which this PR wants to merge"
-    required: true
-  labels:
-    description: "Labels on this PR, including associated metadata"
-    required: true
   script-name:
     description: "Name of script to be executed"
-    required: true
-  token:
-    description: "github token"
     required: true
 runs:
   using: "composite"
@@ -25,7 +16,6 @@ runs:
       uses: actions/checkout@v2
       with:
         ref: ${{ github.event.pull_request.head.ref }}
-        #token: ${{ inputs.token }}
 
     # Assets that are checked out as part of an action are not mounted into subsequent container steps.
     # Therefore, we need to checkout the action code within the workdir to access it within the container steps.
@@ -33,14 +23,14 @@ runs:
       uses: actions/checkout@v2
       with:
         repository: cloudposse/github-action-auto-format
-        path: ${{ inputs.app_checkout_path }}
+        path: ${{ inputs.app-checkout-path }}
 
     # Format files and commit changes (if any) to the PR branch
     - name: "Format files and commit changes (if any)"
       if: ${{ inputs.script-name }}
       uses: docker://cloudposse/build-harness:latest
       with:
-        entrypoint: /github/workspace/${{ inputs.app_checkout_path }}/${{ inputs.script-name }}.sh
+        entrypoint: /github/workspace/${{ inputs.app-checkout-path }}/${{ inputs.script-name }}.sh
       env:
         SENDER: ${{ github.event.sender.login }}
-        IGNORE_PATH: ${{ inputs.app_checkout_path }}
+        IGNORE_PATH: ${{ inputs.app-checkout-path }}
