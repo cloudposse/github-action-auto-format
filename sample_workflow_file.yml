@@ -11,3 +11,8 @@ jobs:
     - uses: cloudposse/github-action-auto-format@main
       with:
         token: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
+        script-name: terraform
+    - uses: cloudposse/github-action-auto-format@main
+      with:
+        token: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
+        script-name: readme

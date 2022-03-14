@@ -11,6 +11,9 @@ inputs:
   labels:
     description: "Labels on this PR, including associated metadata"
     required: true
+  script-name:
+    description: "Name of script to be executed"
+    required: true
   token:
     description: "github token"
     required: true
@@ -30,6 +33,8 @@ runs:
         base-ref: ${{ inputs.base-ref }}
         labels: ${{ inputs.labels }}
 
+    # Assets that are checked out as part of an action are not mounted into subsequent container steps.
+    # Therefore, we need to checkout the action code within the workdir to access it within the container steps.
     - name: "Checkout github-action-terraform-auto-format repo to load script locally on runner"
       uses: actions/checkout@v2
       with:
@@ -58,16 +63,10 @@ runs:
 
     # Format files and commit changes (if any) to the PR branch
     - name: "Format files and commit changes (if any)"
+      if: ${{ inputs.script-name }}
       uses: docker://cloudposse/build-harness:latest
       with:
-        entrypoint: /github/workspace/${{ inputs.app_checkout_path }}/terraform.sh
+        entrypoint: /github/workspace/${{ inputs.app_checkout_path }}/${{ inputs.script-name }}.sh
       env:
         SENDER: ${{ github.event.sender.login }}
-
-    # Rebuild README and commit changes (if any) to the PR branch
-    - name: "Rebuild README and commit changes (if any)"
-      uses: docker://cloudposse/build-harness:latest
-      with:
-        entrypoint: /github/workspace/${{ inputs.app_checkout_path }}/readme.sh
-      env:
-        SENDER: ${{ github.event.sender.login }}
+        IGNORE_PATH: ${{ inputs.app_checkout_path }}
