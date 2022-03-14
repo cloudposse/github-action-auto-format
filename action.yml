@@ -60,7 +60,7 @@ runs:
     - name: "Format files and commit changes (if any)"
       uses: docker://cloudposse/build-harness:latest
       with:
-        entrypoint: ${{ github.action_path }}/terraform.sh
+        entrypoint: /github/workspace/${{ inputs.app_checkout_path }}/terraform.sh
       env:
         SENDER: ${{ github.event.sender.login }}
 
@@ -68,6 +68,6 @@ runs:
     - name: "Rebuild README and commit changes (if any)"
       uses: docker://cloudposse/build-harness:latest
       with:
-        entrypoint: ${{ github.action_path }}/readme.sh
+        entrypoint: /github/workspace/${{ inputs.app_checkout_path }}/readme.sh
       env:
         SENDER: ${{ github.event.sender.login }}
