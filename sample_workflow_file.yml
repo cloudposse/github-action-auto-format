@@ -14,6 +14,7 @@ jobs:
     - uses: cloudposse/github-action-auto-format@main
       with:
         script-name: github_format
+        token: ${{ secrets.TOKEN_WITH_WORKFLOWS_PERMISSION }}
     - uses: cloudposse/github-action-auto-format@main
       with:
         script-name: terraform_format
