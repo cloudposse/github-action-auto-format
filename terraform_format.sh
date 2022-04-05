@@ -1,6 +1,6 @@
 #!/bin/bash
 
-make BUILD_HARNESS_PATH=/build-harness PACKAGES_PREFER_HOST=true -f /build-harness/templates/Makefile.build-harness pr/auto-format/host
+make BUILD_HARNESS_PATH=/build-harness PACKAGES_PREFER_HOST=true -f /build-harness/templates/Makefile.build-harness terraform/fmt
 
 set -x
 
@@ -11,6 +11,8 @@ if [ -n "$output" ]; then
   git config --global user.email '11232728+cloudpossebot@users.noreply.github.com'
   git add -A -- ':!'"${IGNORE_PATH}"'' ':!github-action-terraform-ci'
   git commit -m "Auto Format"
+  # Prevent looping by not pushing changes in response to changes from cloudpossebot
+  [[ $SENDER ==  "cloudpossebot" ]] || git push
 else
   echo "No changes detected"
 fi

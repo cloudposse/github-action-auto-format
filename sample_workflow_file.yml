@@ -10,7 +10,10 @@ jobs:
     steps:
     - uses: cloudposse/github-action-auto-format@main
       with:
-        script-name: terraform
+        script-name: readme
     - uses: cloudposse/github-action-auto-format@main
       with:
-        script-name: readme
+        script-name: github_format
+    - uses: cloudposse/github-action-auto-format@main
+      with:
+        script-name: terraform_format

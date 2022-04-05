@@ -1,5 +1,5 @@
 name: "github-action-auto-format"
-description: "Run auto-formatting functionality ofr different aspects of a repo. (See scripts for details.)"
+description: "Run auto-formatting functionality for different aspects of a repo. (See scripts for details.)"
 inputs:
   app-checkout-path:
     description: 'The path to checkout the action scripts to at runtime'
