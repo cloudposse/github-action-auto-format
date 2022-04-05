@@ -8,7 +8,7 @@ git config --global user.email '11232728+cloudpossebot@users.noreply.github.com'
 
 mkdir gha_tmp_dir
 cd gha_tmp_dir
-git clone https://github.com/cloudposse/.github
+git clone https://.:${SPECIAL_TOKEN}@github.com/cloudposse/.github
 cp ./.github/workflow-templates/*.yml ../.github/workflows/
 cd ..
 rm -rf ./gha_tmp_dir
