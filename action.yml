@@ -44,4 +44,4 @@ runs:
       shell: bash
       run: |
         #!/bin/bash
-        rm -r ${{ inputs.app-checkout-path }}
+        rm -rf ${{ inputs.app-checkout-path }}
