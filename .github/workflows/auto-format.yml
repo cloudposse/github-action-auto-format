@@ -8,13 +8,13 @@ jobs:
     if: (github.event.pull_request.head.repo.full_name == github.repository) && (github.event.pull_request.state == 'open')
     runs-on: ubuntu-latest
     steps:
-    - uses: cloudposse/github-action-auto-format@main
+    - uses: cloudposse/github-action-auto-format@review-branch
       with:
         script-name: readme
-    - uses: cloudposse/github-action-auto-format@main
+    - uses: cloudposse/github-action-auto-format@review-branch
       with:
         script-name: github_format
         token: ${{ secrets.TOKEN_WITH_WORKFLOWS_PERMISSION }}
-    - uses: cloudposse/github-action-auto-format@main
+    - uses: cloudposse/github-action-auto-format@review-branch
       with:
         script-name: terraform_format
