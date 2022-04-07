@@ -1,7 +1,7 @@
 name: "github-action-auto-format"
 description: "Run auto-formatting functionality for different aspects of a repo. (See scripts for details.)"
 inputs:
-  app-checkout-path:
+  actions-files-checkout-path:
     description: 'The path to checkout the action scripts to at runtime'
     default: github-action-auto-format
     required: false
@@ -27,14 +27,14 @@ runs:
       uses: actions/checkout@v2
       with:
         repository: cloudposse/github-action-auto-format
-        path: ${{ inputs.app-checkout-path }}
+        path: ${{ inputs.actions-files-checkout-path }}
 
     # Format files and commit changes (if any) to the PR branch
     - name: "Format files and commit changes (if any)"
       if: ${{ inputs.script-name }}
       uses: docker://cloudposse/build-harness:latest
       with:
-        entrypoint: /github/workspace/${{ inputs.app-checkout-path }}/${{ inputs.script-name }}.sh
+        entrypoint: /github/workspace/${{ inputs.actions-files-checkout-path }}/${{ inputs.script-name }}.sh
       env:
         SENDER: ${{ github.event.sender.login }}
-        IGNORE_PATH: ${{ inputs.app-checkout-path }}
+        IGNORE_PATH: ${{ inputs.actions-files-checkout-path }}
