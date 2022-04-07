@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd ./test
 make BUILD_HARNESS_PATH=/build-harness PACKAGES_PREFER_HOST=true -f /build-harness/templates/Makefile.build-harness terraform/fmt
 
 set -x
