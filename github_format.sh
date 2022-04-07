@@ -15,6 +15,7 @@ cd ..
 rm -rf ./gha_tmp_dir
 
 git remote -v
+git config --list --show-origin
 git add -A -- ':!'"${IGNORE_PATH}"'' ':!github-action-terraform-ci'
 git commit -m "Adding .github files"
 # Prevent looping by not pushing changes in response to changes from cloudpossebot
