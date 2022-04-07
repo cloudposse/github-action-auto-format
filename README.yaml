@@ -59,7 +59,7 @@ related:
 
 # Short description of this project
 description: |-
-  Github   Action Auto-format runs several repository "hygeine"-related tasks:
+  Github Action Auto-format runs several repository "hygeine"-related tasks:
   - It adds all of Cloud Posse's standard repository files to a repo, if they're missing. This includes all of our standard Github Actions workflows and several other files that assist in maintaining the repo, such as [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners).
   - It formats all terraform files in the repo, if needed, by running `terraform fmt` on the repository's files.
   - And it updates the repo's `README.md` file, by rebuilding it using `README.yaml` as a template and processing it with our README builder.

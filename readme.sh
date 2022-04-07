@@ -13,7 +13,8 @@ if [ -n "$output" ]; then
   git config --global user.email '11232728+cloudpossebot@users.noreply.github.com'
   rm .build-harness
   rm -r docs/
-  git add -A -- ':!'"${IGNORE_PATH}"'' ':!github-action-terraform-ci'
+  git add -A -- ':!'"${IGNORE_PATH}"''
+  #git add -A -- ':!'"${IGNORE_PATH}"'' ':!github-action-terraform-ci'
   git commit -m "Updating README.md"
   git push
 else
