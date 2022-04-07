@@ -11,12 +11,12 @@ if [ -n "$output" ]; then
   echo "Changes detected. Pushing to the PR branch"
   git config --global user.name 'cloudpossebot'
   git config --global user.email '11232728+cloudpossebot@users.noreply.github.com'
-  rm .build-harness/
+  rm .build-harness
   rm -r docs/
   git add -A -- ':!'"${IGNORE_PATH}"'' ':!github-action-terraform-ci'
-  git commit -m "Auto Format"
+  git commit -m "Updating README.md"
 else
   echo "No changes detected"
-  rm .build-harness/
+  rm .build-harness
   rm -r docs/
 fi
