@@ -44,4 +44,6 @@ runs:
       shell: bash
       run: |
         #!/bin/bash
+        ls
+        pwd
         rm -rf ${{ inputs.app-checkout-path }}
