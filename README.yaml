@@ -7,9 +7,6 @@
 # Name of this project
 name: GitHub Action Auto-format
 
-# Logo for this project
-#logo: docs/logo.png
-
 # License of this project
 license: "APACHE2"
 
@@ -23,19 +20,16 @@ copyrights:
 github_repo: cloudposse/github-action-auto-format
 
 # Badges to display
-#badges:
-#  - name: "Build Status"
-#    image: "https://github.com/cloudposse/build-harness/workflows/docker/badge.svg?branch=master"
-#    url: "https://github.com/cloudposse/build-harness/actions?query=workflow%3Adocker"
-#  - name: "Latest Release"
-#    image: "https://img.shields.io/github/release/cloudposse/build-harness.svg"
-#    url: "https://github.com/cloudposse/build-harness/releases/latest"
-#  - name: "Slack Community"
-#    image: "https://slack.cloudposse.com/badge.svg"
-#    url: "https://slack.cloudposse.com"
-#  - name: "Discourse Forum"
-#    image: "https://img.shields.io/discourse/https/ask.sweetops.com/posts.svg"
-#    url: "https://ask.sweetops.com/"
+badges:
+  - name: "Build Status"
+    image: "https://github.com/cloudposse/build-harness/workflows/docker/badge.svg?branch=master"
+    url: "https://github.com/cloudposse/build-harness/actions?query=workflow%3Adocker"
+  - name: "Latest Release"
+    image: "https://img.shields.io/github/release/cloudposse/build-harness.svg"
+    url: "https://github.com/cloudposse/build-harness/releases/latest"
+  - name: "Slack Community"
+    image: "https://slack.cloudposse.com/badge.svg"
+    url: "https://slack.cloudposse.com"
 
 related:
   - name: "GitHub Action Auto-release"
@@ -73,13 +67,10 @@ description: |-
   If any of these operations lead to changes in the code, a new commit will be added to the pull request that triggered this action. 
 
   It is possible to run just the README functionality, separately from everything else, depending on the chosen value of the `script-name` input.
-# Introduction to the project
-#introduction: |-
-#  This is an introduction.
 
 # How to use this project
 usage: |-
-  Copy the `sample_workflow_file.yml` file from this repository into the `.github/workflows` folder of the repository to which you'd like to add Auto-format functionality.
+  Copy the `.github/workflows/auto-format.yml` file from this repository into the `.github/workflows` folder of the repository to which you'd like to add Auto-format functionality.
   This will cause Auto-format functionality to execute on pull requests.
   This is an exhaustive list of all valid `script-name`s:
     - `terraform`

@@ -1,6 +1,6 @@
 
 <!-- markdownlint-disable -->
-# GitHub Action Auto-format
+# GitHub Action Auto-format [![Build Status](https://github.com/cloudposse/build-harness/workflows/docker/badge.svg?branch=master)](https://github.com/cloudposse/build-harness/actions?query=workflow%3Adocker) [![Latest Release](https://img.shields.io/github/release/cloudposse/build-harness.svg)](https://github.com/cloudposse/build-harness/releases/latest) [![Slack Community](https://slack.cloudposse.com/badge.svg)](https://slack.cloudposse.com)
 <!-- markdownlint-restore -->
 
 [![README Header][readme_header_img]][readme_header_link]
@@ -71,7 +71,7 @@ It's 100% Open Source and licensed under the [APACHE2](LICENSE).
 
 
 
-Copy the `sample_workflow_file.yml` file from this repository into the `.github/workflows` folder of the repository to which you'd like to add Auto-format functionality.
+Copy the `.github/workflows/auto-format.yml` file from this repository into the `.github/workflows` folder of the repository to which you'd like to add Auto-format functionality.
 This will cause Auto-format functionality to execute on pull requests.
 This is an exhaustive list of all valid `script-name`s:
   - `terraform`
