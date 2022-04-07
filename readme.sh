@@ -14,3 +14,7 @@ if [ -n "$output" ]; then
 else
   echo "No changes detected"
 fi
+
+# The `readme` build-harness target leaves some files lying around after it finishes. Since we might be running other targets after this, in separate GitHub Action steps, we don't want to leave these files lying there, waiting to return some permission error or something.
+rm -r .build-harness/
+rm -r docs/
