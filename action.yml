@@ -27,6 +27,7 @@ runs:
       with:
         repository: cloudposse/github-action-auto-format
         path: ${{ inputs.app-checkout-path }}
+        token: ${{ inputs.token }}
 
     # Format files and commit changes (if any) to the PR branch
     - name: "Format files and commit changes (if any)"
