@@ -38,3 +38,10 @@ runs:
         SENDER: ${{ github.event.sender.login }}
         IGNORE_PATH: ${{ inputs.app-checkout-path }}
         SPECIAL_TOKEN: ${{ inputs.token }}
+
+    # Explicitly clean up checked out action
+    - name: "github-action-terraform-auto-format clean up"
+      shell: bash
+      run: |
+        #!/bin/bash
+        rm -r ${{ inputs.app-checkout-path }}
