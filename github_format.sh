@@ -3,8 +3,10 @@
 set -x
 
 echo "Copying workflows from cloudposse/.github repo"
-git config --local user.name 'cloudpossebot'
-git config --local user.email '11232728+cloudpossebot@users.noreply.github.com'
+#git config --local user.name 'cloudpossebot'
+#git config --local user.email '11232728+cloudpossebot@users.noreply.github.com'
+git config --local user.name 'dylanbannon'
+git config --local user.email 'dylanbannon5@gmail.com'
 
 mkdir gha_tmp_dir
 cd gha_tmp_dir
