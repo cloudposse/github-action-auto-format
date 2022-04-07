@@ -10,11 +10,11 @@ jobs:
     steps:
     - uses: cloudposse/github-action-auto-format@review-branch
       with:
-        script-name: readme
+        script-name: github_format
         token: ${{ secrets.TOKEN_WITH_WORKFLOWS_PERMISSION }}
     - uses: cloudposse/github-action-auto-format@review-branch
       with:
-        script-name: github_format
+        script-name: readme
         token: ${{ secrets.TOKEN_WITH_WORKFLOWS_PERMISSION }}
     - uses: cloudposse/github-action-auto-format@review-branch
       with:
