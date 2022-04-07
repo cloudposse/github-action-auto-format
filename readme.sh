@@ -16,7 +16,7 @@ if [ -n "$output" ]; then
   git add -A -- ':!'"${IGNORE_PATH}"''
   #git add -A -- ':!'"${IGNORE_PATH}"'' ':!github-action-terraform-ci'
   git commit -m "Updating README.md"
-  git push
+  [[ $SENDER ==  "cloudpossebot" ]] || git push
 else
   echo "No changes detected"
   rm .build-harness
