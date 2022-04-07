@@ -15,6 +15,7 @@ if [ -n "$output" ]; then
   rm -r docs/
   git add -A -- ':!'"${IGNORE_PATH}"'' ':!github-action-terraform-ci'
   git commit -m "Updating README.md"
+  git push
 else
   echo "No changes detected"
   rm .build-harness
