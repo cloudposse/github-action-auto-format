@@ -41,7 +41,6 @@ runs:
       with:
         entrypoint: /github/workspace/${{ inputs.actions-files-checkout-path }}/readme.sh
       env:
-        SENDER: ${{ github.event.sender.login }}
         IGNORE_PATH: ${{ inputs.actions-files-checkout-path }}
         EVENT_TYPE: ${{ github.event_name }}
         BOT_NAME: ${{ inputs.bot-name }}
@@ -53,7 +52,6 @@ runs:
       with:
         entrypoint: /github/workspace/${{ inputs.actions-files-checkout-path }}/github_format.sh
       env:
-        SENDER: ${{ github.event.sender.login }}
         IGNORE_PATH: ${{ inputs.actions-files-checkout-path }}
         EVENT_TYPE: ${{ github.event_name }}
         BOT_NAME: ${{ inputs.bot-name }}
@@ -65,7 +63,6 @@ runs:
       with:
         entrypoint: /github/workspace/${{ inputs.actions-files-checkout-path }}/terraform_format.sh
       env:
-        SENDER: ${{ github.event.sender.login }}
         IGNORE_PATH: ${{ inputs.actions-files-checkout-path }}
         HOST_REPO: ${{ github.repository }}
         EVENT_TYPE: ${{ github.event_name }}
@@ -77,8 +74,16 @@ runs:
       run: |
         rm -r ${{ inputs.actions-files-checkout-path }}
 
-    # If triggered by cron event, create pull request for any committed changes
-    - name: "Create pull request"
+    # If triggered by a pull request, push all committed changes
+    - name: "Push to pre-existing PR branch"
+      if: github.event_name != 'schedule' && github.event_name != 'workflow_dispatch'
+      shell: bash
+      run: |
+        # Prevent looping by not pushing changes in response to changes from cloudpossebot
+        [[ "${{ github.event.sender.login }}" ==  "${{ inputs.bot-name }}" ]] || git push
+
+    # If triggered by cron event or manually, create pull request for any committed changes
+    - name: "Create pull request and PR branch"
       if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
       uses: peter-evans/create-pull-request@v4
       with:

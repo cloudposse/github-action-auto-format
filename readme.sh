@@ -15,10 +15,6 @@ if [ -n "$output" ]; then
   rm -r docs/
   git add -A -- ':!'"${IGNORE_PATH}"''
   git commit -m "Updating README.md"
-  if [[ "$EVENT_TYPE" != "schedule" && "$EVENT_TYPE" != "workflow_dispatch" ]]; then
-    # Prevent looping by not pushing changes in response to changes from cloudpossebot
-    [[ $SENDER ==  "cloudpossebot" ]] || git push
-  fi
 else
   echo "No changes detected"
   rm .build-harness
