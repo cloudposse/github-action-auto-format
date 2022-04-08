@@ -41,6 +41,6 @@ echo $?
 git diff --cached --exit-code
 echo $?
 
-if git diff --staged; then
+if ! git diff --staged --exit-code; then
   git commit -m "Adding .github files"
 fi
