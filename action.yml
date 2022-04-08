@@ -79,7 +79,7 @@ runs:
       if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
       uses: peter-evans/create-pull-request@v4
       with:
-        token: ${{ inputs.pr-token }}
+        token: ${{ inputs.workflow-token }}
         commit-message: Auto-format functionality (readme, .github files, and terraform formatting)
         title: Scheduled Auto-format
         body: |-
