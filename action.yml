@@ -11,6 +11,7 @@ inputs:
   token:
     description: "token with `workflows` permission, for use in `github_format` step"
     required: true
+
 runs:
   using: "composite"
   steps:
@@ -39,18 +40,3 @@ runs:
         SENDER: ${{ github.event.sender.login }}
         IGNORE_PATH: ${{ inputs.actions-files-checkout-path }}
         HOST_REPO: ${{ github.repository }}
-
-    # If triggered by cron event, create pull request for any committed changes
-    - name: "Create pull request"
-      if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
-      uses: peter-evans/create-pull-request@v4
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        commit-message: Auto-format functionality (readme, .github files, and terraform formatting)
-        title: Scheduled Auto-format
-        body: |-
-          This auto-generated PR could do any combination of the following - updating `README.md` based on changes to `README.yaml`,
-          adding standard files from the `cloudposse/.github` repo to this repo's `.github` folder, and ensuring that the formatting
-          of all Terraform files present in the repo is uniform.
-        labels: automated pr
-        branch: github-action-auto-format
