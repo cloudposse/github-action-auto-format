@@ -80,11 +80,10 @@ examples: |-
 quickstart: |-
   Here's how to get started...
   1. Copy `.github/workflows/auto-format.yml` to the corresponding folder in your target repo.
-  2. Generate a Personal Access Token (PAT) that has the `workflow` permission by following the directions [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) and selecting the `workflow` tick box on the token creation screen, if you don't have one already.
-`make init` to initialize the [`build-harness`](https://github.com/cloudposse/build-harness/)
+  2. Generate a Personal Access Token (PAT) that has the `workflow` permission *using an account that has at least `write` permissions in the target repo* by following the directions [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) and selecting the `workflow` tick box on the token creation screen, if you don't have one already.
   3. Add this token as a secret to your target repository and replace the default token name in the `workflow-token:` input of the `github-action-auto-format` step to the name of your token.
-  4. Change the `bot-name:` input of the `github-action-auto-format` step to the name of a user who has at least `write` permission in the target repo.
-  5. The default setting the for the Auto-format GitHub Action to execute all of its functionality when run. If you'd like to use a subset of the full functionality, modify the `script-names:` input of the `github-action-auto-format` step as detailed in the [usage](#usage) section.
+  4. Change the `bot-name:` input of the `github-action-auto-format` step to the name of the user who generated the token in step 2. *This user must have at least `write` permissions in hte target repo.`
+  5. The default setting for the Auto-format GitHub Action to execute all of its functionality when run. If you'd like to use a subset of the full functionality, modify the `script-names:` input of the `github-action-auto-format` step as detailed in the [usage](#usage) section.
   6. Optional - You may want to change when the scheduled cron trigger is executed. If you'd like a guide, here's a useful resource for help in crafting cron strings: https://crontab.guru/
 
 # Contributors to this project
