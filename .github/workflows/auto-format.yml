@@ -1,7 +1,5 @@
 name: "auto-format"
 on:
-  pull_request:
-    types: [opened, synchronize]
   schedule:
     - cron: '5 8 * * *'
   workflow_dispatch:
