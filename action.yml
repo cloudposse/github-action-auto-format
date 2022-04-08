@@ -43,6 +43,7 @@ runs:
       env:
         SENDER: ${{ github.event.sender.login }}
         IGNORE_PATH: ${{ inputs.actions-files-checkout-path }}
+        EVENT_TYPE: ${{ github.event_name }}
 
     # Add and commit standard .github files to the PR branch
     - name: "Add and commit standard .github files"
@@ -53,6 +54,7 @@ runs:
       env:
         SENDER: ${{ github.event.sender.login }}
         IGNORE_PATH: ${{ inputs.actions-files-checkout-path }}
+        EVENT_TYPE: ${{ github.event_name }}
 
     # Format Terraform files and commit changes (if any) to the PR branch
     - name: "Format Terraform files and commit changes (if any)"
@@ -64,6 +66,7 @@ runs:
         SENDER: ${{ github.event.sender.login }}
         IGNORE_PATH: ${{ inputs.actions-files-checkout-path }}
         HOST_REPO: ${{ github.repository }}
+        EVENT_TYPE: ${{ github.event_name }}
 
     # If triggered by cron event, create pull request for any committed changes
     - name: "Create pull request"

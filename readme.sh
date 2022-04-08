@@ -15,7 +15,9 @@ if [ -n "$output" ]; then
   rm -r docs/
   git add -A -- ':!'"${IGNORE_PATH}"''
   git commit -m "Updating README.md"
-  [[ $SENDER ==  "cloudpossebot" ]] || git push
+  if [[ "$EVENT_NAME" != "schedule" && "$EVENT_NAME" != "workflow_dispatch" ]]; then
+    [[ $SENDER ==  "cloudpossebot" ]] || git push
+  fi
 else
   echo "No changes detected"
   rm .build-harness

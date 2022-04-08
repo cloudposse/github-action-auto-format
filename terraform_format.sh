@@ -20,7 +20,9 @@ if [ -n "$output" ]; then
   git add -A -- ':!'"${IGNORE_PATH}"''
   git commit -m "Auto Format"
   # Prevent looping by not pushing changes in response to changes from cloudpossebot
-  [[ $SENDER ==  "cloudpossebot" ]] || git push
+  if [[ "$EVENT_NAME" != "schedule" && "$EVENT_NAME" != "workflow_dispatch" ]]; then
+    [[ $SENDER ==  "cloudpossebot" ]] || git push
+  fi
 else
   echo "No changes detected"
 fi
