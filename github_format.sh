@@ -13,34 +13,8 @@ cp ./.github/workflow-templates/*.yml ../.github/workflows/
 cd ..
 rm -rf ./gha_tmp_dir
 
-git diff
-echo $?
-git diff --staged
-echo $?
-git diff --cached
-echo $?
-git diff --exit-code
-echo $?
-git diff --staged --exit-code
-echo $?
-git diff --cached --exit-code
-echo $?
-
 git add -A -- ':!'"${IGNORE_PATH}"''
-
-git diff
-echo $?
-git diff --staged
-echo $?
-git diff --cached
-echo $?
-git diff --exit-code
-echo $?
-git diff --staged --exit-code
-echo $?
-git diff --cached --exit-code
-echo $?
-
+# Don't try committing without any files staged. That returns a non-zero exit code.
 if ! git diff --staged --exit-code; then
   git commit -m "Adding .github files"
 fi
