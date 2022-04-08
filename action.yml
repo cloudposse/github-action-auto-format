@@ -11,8 +11,13 @@ inputs:
   workflow-token:
     description: "token with `workflows` permission, for use in `github_format.sh` and PR creation steps"
     required: true
+  bot-name:
+    description: "username that will be used for writing new commits"
+    required: false
+    default: cloudpossebot
 
 runs:
+  if: !contains( github.event.sender.login, inuts.bot_name )
   using: "composite"
   steps:
     # Checkout repo
@@ -40,6 +45,7 @@ runs:
         SENDER: ${{ github.event.sender.login }}
         IGNORE_PATH: ${{ inputs.actions-files-checkout-path }}
         EVENT_TYPE: ${{ github.event_name }}
+        BOT_NAME: ${{ inputs.bot-name }}
 
     # Add and commit standard .github files to the PR branch
     - name: "Add and commit standard .github files"
@@ -51,6 +57,7 @@ runs:
         SENDER: ${{ github.event.sender.login }}
         IGNORE_PATH: ${{ inputs.actions-files-checkout-path }}
         EVENT_TYPE: ${{ github.event_name }}
+        BOT_NAME: ${{ inputs.bot-name }}
 
     # Format Terraform files and commit changes (if any) to the PR branch
     - name: "Format Terraform files and commit changes (if any)"
@@ -63,6 +70,7 @@ runs:
         IGNORE_PATH: ${{ inputs.actions-files-checkout-path }}
         HOST_REPO: ${{ github.repository }}
         EVENT_TYPE: ${{ github.event_name }}
+        BOT_NAME: ${{ inputs.bot-name }}
 
     # Cleanup checked out action files, since the pull request will add and commit all files indiscriminately
     - name: "Clean up github-action-auto-format repo"
