@@ -12,5 +12,5 @@ jobs:
     - uses: cloudposse/github-action-auto-format@review-branch
       with:
         script-name: readme,github_format,terraform_format
-        token: ${{ secrets.TOKEN_WITH_WORKFLOWS_PERMISSION }}
-        special-token: ${{ secrets.PULL_REQUEST_CREATOR_TOKEN }}
+        workflow-token: ${{ secrets.TOKEN_WITH_WORKFLOWS_PERMISSION }}
+        pr-token: ${{ secrets.PULL_REQUEST_CREATOR_TOKEN }}

@@ -14,8 +14,8 @@ cd ..
 rm -rf ./gha_tmp_dir
 
 git add -A -- ':!'"${IGNORE_PATH}"''
-git commit -m "Adding .github files"
 # Prevent looping by not pushing changes in response to changes from cloudpossebot
 if [[ "$EVENT_NAME" != "schedule" && "$EVENT_NAME" != "workflow_dispatch" ]]; then
+  git commit -m "Adding .github files"
   [[ $SENDER ==  "cloudpossebot" ]] || git push
 fi

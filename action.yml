@@ -8,10 +8,10 @@ inputs:
   script-name:
     description: "Name of script to be executed"
     required: true
-  token:
+  workflow-token:
     description: "token with `workflows` permission, for use in `github_format` step"
     required: true
-  special-token:
+  pr-token:
     description: "token with repo scope, which allows the creation of a pull request"
     required: true
 
@@ -24,11 +24,11 @@ runs:
       uses: actions/checkout@v2
       with:
         ref: ${{ github.event.pull_request.head.ref }}
-        token: ${{ inputs.token }}
+        token: ${{ inputs.workflow-token }}
 
     # Assets that are checked out as part of an action are not mounted into subsequent container steps.
     # Therefore, we need to checkout the action code within the workdir to access it within the container steps.
-    - name: "Checkout github-action-terraform-auto-format repo to load script locally on runner"
+    - name: "Checkout github-action-auto-format repo to load script locally on runner"
       uses: actions/checkout@v2
       with:
         repository: cloudposse/github-action-auto-format
@@ -68,12 +68,18 @@ runs:
         HOST_REPO: ${{ github.repository }}
         EVENT_TYPE: ${{ github.event_name }}
 
+    # Cleanup checked out action files, since the pull request will add and commit all files indiscriminately
+    - name: "Clean up github-action-auto-format repo"
+      shell: bash
+      run: |
+        rm -r ${{ inputs.actions-files-checkout-path }}
+
     # If triggered by cron event, create pull request for any committed changes
     - name: "Create pull request"
       if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
       uses: peter-evans/create-pull-request@v4
       with:
-        token: ${{ inputs.special-token }}
+        token: ${{ inputs.pr-token }}
         commit-message: Auto-format functionality (readme, .github files, and terraform formatting)
         title: Scheduled Auto-format
         body: |-
