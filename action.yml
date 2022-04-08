@@ -5,7 +5,7 @@ inputs:
     description: 'The path to checkout the action scripts to at runtime'
     default: github-action-auto-format
     required: false
-  script-name:
+  script-names:
     description: "Name of script to be executed"
     required: true
   workflow-token:
