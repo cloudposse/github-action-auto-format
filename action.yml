@@ -11,6 +11,10 @@ inputs:
   token:
     description: "token with `workflows` permission, for use in `github_format` step"
     required: true
+  special-token:
+    description: "token with repo scope, which allows the creation of a pull request"
+    required: true
+
 
 runs:
   using: "composite"
@@ -30,13 +34,48 @@ runs:
         repository: cloudposse/github-action-auto-format
         path: ${{ inputs.actions-files-checkout-path }}
 
-    # Format files and commit changes (if any) to the PR branch
-    - name: "Format files and commit changes (if any)"
-      if: ${{ inputs.script-name }}
+    # Rebuild README.md and commit changes (if any) to the PR branch
+    - name: "Rebuild README.md and commit changes (if any)"
+      if: contains( inputs.script-names, 'readme' )
       uses: docker://cloudposse/build-harness:latest
       with:
-        entrypoint: /github/workspace/${{ inputs.actions-files-checkout-path }}/${{ inputs.script-name }}.sh
+        entrypoint: /github/workspace/${{ inputs.actions-files-checkout-path }}/readme.sh
+      env:
+        SENDER: ${{ github.event.sender.login }}
+        IGNORE_PATH: ${{ inputs.actions-files-checkout-path }}
+
+    # Add and commit standard .github files to the PR branch
+    - name: "Add and commit standard .github files"
+      if: contains( inputs.script-names, 'github_format' )
+      uses: docker://cloudposse/build-harness:latest
+      with:
+        entrypoint: /github/workspace/${{ inputs.actions-files-checkout-path }}/github_format.sh
+      env:
+        SENDER: ${{ github.event.sender.login }}
+        IGNORE_PATH: ${{ inputs.actions-files-checkout-path }}
+
+    # Format Terraform files and commit changes (if any) to the PR branch
+    - name: "Format Terraform files and commit changes (if any)"
+      if: contains( inputs.script-names, 'terraform_format' )
+      uses: docker://cloudposse/build-harness:latest
+      with:
+        entrypoint: /github/workspace/${{ inputs.actions-files-checkout-path }}/terraform_format.sh
       env:
         SENDER: ${{ github.event.sender.login }}
         IGNORE_PATH: ${{ inputs.actions-files-checkout-path }}
         HOST_REPO: ${{ github.repository }}
+
+    # If triggered by cron event, create pull request for any committed changes
+    - name: "Create pull request"
+      if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+      uses: peter-evans/create-pull-request@v4
+      with:
+        token: ${{ inputs.special-token }}
+        commit-message: Auto-format functionality (readme, .github files, and terraform formatting)
+        title: Scheduled Auto-format
+        body: |-
+          This auto-generated PR could do any combination of the following - updating `README.md` based on changes to `README.yaml`,
+          adding standard files from the `cloudposse/.github` repo to this repo's `.github` folder, and ensuring that the formatting
+          of all Terraform files present in the repo is uniform.
+        labels: automated pr
+        branch: github-action-auto-format

@@ -14,7 +14,6 @@ if [ -n "$output" ]; then
   rm .build-harness
   rm -r docs/
   git add -A -- ':!'"${IGNORE_PATH}"''
-  #git add -A -- ':!'"${IGNORE_PATH}"'' ':!github-action-terraform-ci'
   git commit -m "Updating README.md"
   [[ $SENDER ==  "cloudpossebot" ]] || git push
 else
