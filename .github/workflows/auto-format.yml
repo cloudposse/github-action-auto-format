@@ -4,7 +4,7 @@ on:
     types: [opened, synchronize]
   # Update repo nightly
   schedule:
-    cron: '36 7 * * *'
+    - cron: '40 7 * * *'
 
 jobs:
   auto-format:
