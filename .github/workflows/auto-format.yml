@@ -2,6 +2,9 @@ name: "auto-format"
 on:
   pull_request:
     types: [opened, synchronize]
+  # Update repo nightly
+  schedule:
+    cron: '36 7 * * *'
 
 jobs:
   auto-format:
