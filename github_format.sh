@@ -15,15 +15,15 @@ rm -rf ./gha_tmp_dir
 
 git add -A -- ':!'"${IGNORE_PATH}"''
 
-git diff
+git diff > /dev/null
 echo $?
-git diff --staged
+git diff --staged > /dev/null
 echo $?
-git diff --cached
+git diff --cached > /dev/null
 echo $?
-git diff --staged --exit-code
+git diff --staged --exit-code > /dev/null
 echo $?
-git diff --cached --exit-code
+git diff --cached --exit-code > /dev/null
 echo $?
 
 if git diff --staged; then
