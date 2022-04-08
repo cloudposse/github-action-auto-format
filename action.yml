@@ -9,12 +9,8 @@ inputs:
     description: "Name of script to be executed"
     required: true
   workflow-token:
-    description: "token with `workflows` permission, for use in `github_format` step"
+    description: "token with `workflows` permission, for use in `github_format.sh` and PR creation steps"
     required: true
-  pr-token:
-    description: "token with repo scope, which allows the creation of a pull request"
-    required: true
-
 
 runs:
   using: "composite"

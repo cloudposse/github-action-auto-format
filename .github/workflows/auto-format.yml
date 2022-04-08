@@ -13,4 +13,3 @@ jobs:
       with:
         script-names: readme,github_format,terraform_format
         workflow-token: ${{ secrets.TOKEN_WITH_WORKFLOWS_PERMISSION }}
-        pr-token: ${{ secrets.PULL_REQUEST_CREATOR_TOKEN }}
