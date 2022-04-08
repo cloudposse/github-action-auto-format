@@ -15,3 +15,4 @@ jobs:
       with:
         script-names: readme,github_format,terraform_format
         workflow-token: ${{ secrets.TOKEN_WITH_WORKFLOWS_PERMISSION }}
+        bot-name: cloudpossebot
