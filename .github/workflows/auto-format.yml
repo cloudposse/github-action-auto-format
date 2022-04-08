@@ -4,11 +4,11 @@ on:
     types: [opened, synchronize]
   # Update repo nightly
   schedule:
-    - cron: '40 7 * * *'
+    - cron: '47 7 * * *'
 
 jobs:
   auto-format:
-    if: (github.event.pull_request.head.repo.full_name == github.repository) && (github.event.pull_request.state == 'open')
+    if: ( (github.event.pull_request.head.repo.full_name == github.repository) && (github.event.pull_request.state == 'open') ) || (github.event_name == 'schedule')
     runs-on: ubuntu-latest
     steps:
     - uses: cloudposse/github-action-auto-format@review-branch
