@@ -38,3 +38,4 @@ runs:
       env:
         SENDER: ${{ github.event.sender.login }}
         IGNORE_PATH: ${{ inputs.actions-files-checkout-path }}
+        HOST_REPO: ${{ github.repository }}
