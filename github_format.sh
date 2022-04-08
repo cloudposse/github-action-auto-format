@@ -13,32 +13,32 @@ cp ./.github/workflow-templates/*.yml ../.github/workflows/
 cd ..
 rm -rf ./gha_tmp_dir
 
-git diff > /dev/null
+git diff
 echo $?
-git diff --staged > /dev/null
+git diff --staged
 echo $?
-git diff --cached > /dev/null
+git diff --cached
 echo $?
-git diff --exit-code > /dev/null
+git diff --exit-code
 echo $?
-git diff --staged --exit-code > /dev/null
+git diff --staged --exit-code
 echo $?
-git diff --cached --exit-code > /dev/null
+git diff --cached --exit-code
 echo $?
 
 git add -A -- ':!'"${IGNORE_PATH}"''
 
-git diff > /dev/null
+git diff
 echo $?
-git diff --staged > /dev/null
+git diff --staged
 echo $?
-git diff --cached > /dev/null
+git diff --cached
 echo $?
-git diff --exit-code > /dev/null
+git diff --exit-code
 echo $?
-git diff --staged --exit-code > /dev/null
+git diff --staged --exit-code
 echo $?
-git diff --cached --exit-code > /dev/null
+git diff --cached --exit-code
 echo $?
 
 if git diff --staged; then
