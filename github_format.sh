@@ -14,6 +14,12 @@ cd ..
 rm -rf ./gha_tmp_dir
 
 git add -A -- ':!'"${IGNORE_PATH}"''
+
+git diff
+git diff --staged
+echo $?
+git diff --cached
+
 if git diff --staged; then
   git commit -m "Adding .github files"
 fi
