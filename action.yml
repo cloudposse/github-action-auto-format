@@ -17,7 +17,6 @@ inputs:
     default: cloudpossebot
 
 runs:
-  if: !contains( github.event.sender.login, inuts.bot_name )
   using: "composite"
   steps:
     # Checkout repo
