@@ -19,7 +19,7 @@ if [ -n "$output" ]; then
   git config --global user.email '11232728+cloudpossebot@users.noreply.github.com'
   git add -A -- ':!'"${IGNORE_PATH}"''
   # Prevent looping by not pushing changes in response to changes from cloudpossebot
-  if [[ "$EVENT_NAME" != "schedule" && "$EVENT_NAME" != "workflow_dispatch" ]]; then
+  if [[ "$EVENT_TYPE" != "schedule" && "$EVENT_TYPE" != "workflow_dispatch" ]]; then
     git commit -m "Auto Format"
     [[ $SENDER ==  "cloudpossebot" ]] || git push
   fi
