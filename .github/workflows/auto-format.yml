@@ -1,7 +1,7 @@
 name: "auto-format"
 on:
   schedule:
-    - cron: '5 8 * * *'
+    - cron: '18 17 * * *'
   workflow_dispatch:
 
 jobs:
