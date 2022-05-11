@@ -1,6 +1,6 @@
 name: "auto-format"
 on:
-  pull_request:
+  pull_request_target:
     types: [opened, synchronize]
   schedule:
     - cron: '0 7 * * *'
@@ -12,7 +12,7 @@ jobs:
     if: ${{ !( (github.event_name == 'pull_request') && (github.event.pull_request.head.repo.full_name != github.repository) ) }}
     runs-on: ubuntu-latest
     steps:
-    - uses: cloudposse/github-action-auto-format@review-branch
+    - uses: cloudposse/github-action-auto-format@main
       with:
         script-names: readme,github_format,terraform_format
         workflow-token: ${{ secrets.TOKEN_WITH_WORKFLOWS_PERMISSION }}
