@@ -36,10 +36,10 @@ runs:
 
     # Rebuild README.md and commit changes (if any) to the PR branch
     - name: "Rebuild README.md and commit changes (if any)"
-      if: contains( inputs.script-names, 'readme' )
+      if: contains( inputs.script-names, 'readme_format' )
       uses: docker://cloudposse/build-harness:latest
       with:
-        entrypoint: /github/workspace/${{ inputs.actions-files-checkout-path }}/readme.sh
+        entrypoint: /github/workspace/${{ inputs.actions-files-checkout-path }}/readme_format.sh
       env:
         IGNORE_PATH: ${{ inputs.actions-files-checkout-path }}
         EVENT_TYPE: ${{ github.event_name }}
