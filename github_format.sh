@@ -9,7 +9,10 @@ git config --local user.email "11232728+${BOT_NAME}@users.noreply.github.com"
 mkdir gha_tmp_dir
 cd gha_tmp_dir
 git clone https://github.com/cloudposse/.github
-cp ./.github/workflow-templates/*.yml ../.github/workflows/
+##### DEBUG
+rm ./.github/.github/workflows/auto-format.yml
+##### /DEBUG
+cp ./.github/.github/workflows/*.yml ../.github/workflows/
 cd ..
 rm -rf ./gha_tmp_dir
 
