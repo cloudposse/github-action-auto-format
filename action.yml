@@ -47,40 +47,6 @@ runs:
         EVENT_TYPE: ${{ github.event_name }}
         BOT_NAME: ${{ inputs.bot-name }}
 
-#    # Rebuild README.md and commit changes (if any) to the PR branch
-#    - name: "Rebuild README.md and commit changes (if any)"
-#      if: contains( inputs.script-names, 'readme_format' )
-#      uses: docker://cloudposse/build-harness:latest
-#      with:
-#        entrypoint: /github/workspace/${{ inputs.actions-files-checkout-path }}/readme_format.sh
-#      env:
-#        IGNORE_PATH: ${{ inputs.actions-files-checkout-path }}
-#        EVENT_TYPE: ${{ github.event_name }}
-#        BOT_NAME: ${{ inputs.bot-name }}
-#
-#    # Add and commit standard .github files to the PR branch
-#    - name: "Add and commit standard .github files"
-#      if: contains( inputs.script-names, 'github_format' )
-#      uses: docker://cloudposse/build-harness:latest
-#      with:
-#        entrypoint: /github/workspace/${{ inputs.actions-files-checkout-path }}/github_format.sh
-#      env:
-#        IGNORE_PATH: ${{ inputs.actions-files-checkout-path }}
-#        EVENT_TYPE: ${{ github.event_name }}
-#        BOT_NAME: ${{ inputs.bot-name }}
-#
-#    # Format Terraform files and commit changes (if any) to the PR branch
-#    - name: "Format Terraform files and commit changes (if any)"
-#      if: contains( inputs.script-names, 'terraform_format' )
-#      uses: docker://cloudposse/build-harness:latest
-#      with:
-#        entrypoint: /github/workspace/${{ inputs.actions-files-checkout-path }}/terraform_format.sh
-#      env:
-#        IGNORE_PATH: ${{ inputs.actions-files-checkout-path }}
-#        HOST_REPO: ${{ github.repository }}
-#        EVENT_TYPE: ${{ github.event_name }}
-#        BOT_NAME: ${{ inputs.bot-name }}
-
     # Cleanup checked out action files, since the pull request will add and commit all files indiscriminately
     - name: "Clean up github-action-auto-format repo"
       shell: bash

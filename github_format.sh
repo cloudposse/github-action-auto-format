@@ -14,13 +14,7 @@ cp ./.github/.github/workflows/*.yml ../.github/workflows/
 cd ..
 rm -rf ./gha_tmp_dir
 
-pwd
-ls -lhat
-ls -lhat ..
-whoami
-git --version
 git config --global --add safe.directory /github/workspace
-git status
 git config --local user.name "${BOT_NAME}"
 git config --local user.email "11232728+${BOT_NAME}@users.noreply.github.com"
 git add ./.github/workflows/*
