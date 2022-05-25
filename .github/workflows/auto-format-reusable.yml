@@ -4,6 +4,7 @@ on:
     inputs:
       actions-files-checkout-path:
         description: 'The path on the github-runner to checkout the auto-format action scripts to at runtime'
+        type: string
         default: github-action-auto-format
         required: false
       format-task:
@@ -12,6 +13,7 @@ on:
         required: true
       bot-name:
         description: "Username that will be used for writing new commits"
+        type: string
         required: false
         default: cloudpossebot
     secrets:
