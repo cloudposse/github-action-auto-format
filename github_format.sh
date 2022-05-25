@@ -8,12 +8,12 @@ mkdir gha_tmp_dir
 cd gha_tmp_dir
 git clone https://github.com/cloudposse/.github
 
-# if this is the cloudposse/github-action-auto-format repository, don't copy the version of auto-format.yml from cloudposse/.github - it should be different
 git config --global --add safe.directory /github/workspace
-if [ "$(basename `git rev-parse --show-toplevel`)" == "github-action-auto-format" ]; then
+# if this is the cloudposse/github-action-auto-format repository, don't copy the version of auto-format.yml from cloudposse/.github - it should be different
+if [[ "$(git config --get remote.origin.url)" =~ cloudposse\/github-action-auto-format ]]; then
   rm ./.github/.github/workflows/auto-format.yml
 else
-  echo "$(basename `git rev-parse --show-toplevel`)"
+  echo "$(git config --get remote.origin.url)"
 fi
 
 cp ./.github/.github/workflows/*.yml ../.github/workflows/
