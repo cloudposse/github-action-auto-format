@@ -39,6 +39,6 @@ jobs:
     - uses: cloudposse/github-action-auto-format@review-branch
       with:
         format-task: ${{ inputs.format-task }}
-        workflow-token: ${{ secrets.workflow_token }}
+        workflow-token: ${{ secrets.workflow-token }}
         #workflow-token: ${{ secrets.TOKEN_WITH_WORKFLOWS_PERMISSION }}
         bot-name: ${{ inputs.bot-name }}
