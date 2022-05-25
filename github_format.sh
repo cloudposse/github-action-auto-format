@@ -11,6 +11,8 @@ git clone https://github.com/cloudposse/.github
 # if this is the cloudposse/github-action-auto-format repository, don't copy the version of auto-format.yml from cloudposse/.github - it should be different
 if [ "$(basename `git rev-parse --show-toplevel`)" == "github-action-auto-format" ]; then
   rm ./.github/.github/workflows/auto-format.yml
+else
+  echo "$(basename `git rev-parse --show-toplevel`)"
 fi
 
 cp ./.github/.github/workflows/*.yml ../.github/workflows/
