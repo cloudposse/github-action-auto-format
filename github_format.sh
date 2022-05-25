@@ -7,9 +7,12 @@ echo "Copying workflows from cloudposse/.github repo"
 mkdir gha_tmp_dir
 cd gha_tmp_dir
 git clone https://github.com/cloudposse/.github
-##### DEBUG
-rm ./.github/.github/workflows/auto-format.yml
-##### /DEBUG
+
+# if this is the cloudposse/github-action-auto-format repository, don't copy the version of auto-format.yml from cloudposse/.github - it should be different
+if [ "$(basename `git rev-parse --show-toplevel`)" == "github-action-auto-format" ]; then
+  rm ./.github/.github/workflows/auto-format.yml
+fi
+
 cp ./.github/.github/workflows/*.yml ../.github/workflows/
 cd ..
 rm -rf ./gha_tmp_dir
