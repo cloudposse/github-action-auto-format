@@ -5,7 +5,6 @@ on:
   schedule:
     - cron: '0 7 * * *'
   workflow_dispatch:
-  workflow_call:
 
 jobs:
   auto-format:
@@ -21,9 +20,9 @@ jobs:
           - format-task: "github"
           - format-task: "terraform"
 
-    steps:
-    - uses: cloudposse/github-action-auto-format@review-branch
-      with:
-        format-task: ${{ matrix.format-task }}
-        workflow-token: ${{ secrets.TOKEN_WITH_WORKFLOWS_PERMISSION }}
-        bot-name: cloudpossebot
+    uses: cloudposse/github-action-auto-format/.github/workflows/auto-format-reusable.yml@review-branch
+    with:
+      format-task: ${{ matrix.format-task }}
+      bot-name: cloudpossebot
+    secrets:
+      workflow-token: ${{ secrets.TOKEN_WITH_WORKFLOWS_PERMISSION }}
