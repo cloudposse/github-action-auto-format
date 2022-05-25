@@ -16,6 +16,10 @@ cp ./.github/.github/workflows/*.yml ../.github/workflows/
 cd ..
 rm -rf ./gha_tmp_dir
 
+ls -lhat
+ls -lhat ..
+whoami
+git --version
 git status
 git add -A
 # Don't try committing without any files staged. That returns a non-zero exit code.
