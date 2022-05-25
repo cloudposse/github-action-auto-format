@@ -9,6 +9,7 @@ cd gha_tmp_dir
 git clone https://github.com/cloudposse/.github
 
 # if this is the cloudposse/github-action-auto-format repository, don't copy the version of auto-format.yml from cloudposse/.github - it should be different
+git config --global --add safe.directory /github/workspace
 if [ "$(basename `git rev-parse --show-toplevel`)" == "github-action-auto-format" ]; then
   rm ./.github/.github/workflows/auto-format.yml
 else
@@ -19,7 +20,6 @@ cp ./.github/.github/workflows/*.yml ../.github/workflows/
 cd ..
 rm -rf ./gha_tmp_dir
 
-git config --global --add safe.directory /github/workspace
 git config --local user.name "${BOT_NAME}"
 git config --local user.email "11232728+${BOT_NAME}@users.noreply.github.com"
 git add ./.github/workflows/*
