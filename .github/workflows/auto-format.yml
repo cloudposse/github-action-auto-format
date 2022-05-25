@@ -5,8 +5,17 @@ on:
   schedule:
     - cron: '0 7 * * *'
   workflow_dispatch:
+  workflow_call:
 
 jobs:
+  # Delete "format-task:" lines as desired to limit the scope of the overall auto-formatting task.
+  strategy:
+    matrix:
+      include:
+        - format-task: "readme"
+        - format-task: "github"
+        - format-task: "terraform"
+
   auto-format:
     # only run on pull requests so long as they don't come from forks
     if: ${{ !( (github.event_name == 'pull_request') && (github.event.pull_request.head.repo.full_name != github.repository) ) }}
@@ -14,6 +23,6 @@ jobs:
     steps:
     - uses: cloudposse/github-action-auto-format@main
       with:
-        script-names: readme_format,github_format,terraform_format
+        format-task: ${{ matrix.format-task }}
         workflow-token: ${{ secrets.TOKEN_WITH_WORKFLOWS_PERMISSION }}
         bot-name: cloudpossebot
