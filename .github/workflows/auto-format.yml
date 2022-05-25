@@ -22,7 +22,7 @@ jobs:
           - format-task: "terraform"
 
     steps:
-    - uses: cloudposse/github-action-auto-format@main
+    - uses: cloudposse/github-action-auto-format@review-branch
       with:
         format-task: ${{ matrix.format-task }}
         workflow-token: ${{ secrets.TOKEN_WITH_WORKFLOWS_PERMISSION }}
