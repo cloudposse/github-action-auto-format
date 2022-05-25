@@ -23,7 +23,7 @@ whoami
 git --version
 git config --global --add safe.directory /github/workspace
 git status
-git add -A
+git add ./.github/workflows/*
 # Don't try committing without any files staged. That returns a non-zero exit code.
 if ! git diff --staged --exit-code; then
   git commit -m "Adding .github files"
