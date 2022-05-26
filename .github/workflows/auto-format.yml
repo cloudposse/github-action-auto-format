@@ -13,17 +13,17 @@ jobs:
     #runs-on: ubuntu-latest
 
     # Delete "format-task:" lines as desired to limit the scope of the overall auto-formatting task.
-    #strategy:
-    #  matrix:
-    #    include:
-    #      - format-task: "readme"
-    #      - format-task: "github"
-    #      - format-task: "terraform"
+    strategy:
+      matrix:
+        include:
+          - format-task: "readme"
+          - format-task: "github"
+          - format-task: "terraform"
 
     uses: cloudposse/github-action-auto-format/.github/workflows/auto-format-reusable.yml@review-branch
     with:
-      format-task: readme
-      #format-task: ${{ matrix.format-task }}
+      #format-task: readme
+      format-task: ${{ matrix.format-task }}
       bot-name: cloudpossebot
     secrets:
       workflow-token: ${{ secrets.TOKEN_WITH_WORKFLOWS_PERMISSION }}
