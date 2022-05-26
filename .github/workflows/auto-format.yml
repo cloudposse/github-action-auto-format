@@ -16,6 +16,7 @@ jobs:
     with:
       # Delete "format-tasks:" values as desired to limit the scope of the overall auto-formatting task.
       format-tasks: "[\"readme\", \"github\", \"terraform\"]"
+      # GitHub username to use for automated commits (should be a real GitHub user)
       bot-name: cloudpossebot
     secrets:
       workflow-token: ${{ secrets.TOKEN_WITH_WORKFLOWS_PERMISSION }}

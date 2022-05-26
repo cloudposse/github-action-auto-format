@@ -21,7 +21,7 @@ cd ..
 rm -rf ./gha_tmp_dir
 
 git config --local user.name "${BOT_NAME}"
-git config --local user.email "11232728+${BOT_NAME}@users.noreply.github.com"
+git config --local user.email "${BOT_EMAIL}"
 git add ./.github/workflows/*
 # Don't try committing without any files staged. That returns a non-zero exit code.
 if ! git diff --staged --exit-code; then

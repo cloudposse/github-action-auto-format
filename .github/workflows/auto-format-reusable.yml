@@ -16,6 +16,10 @@ on:
         type: string
         required: false
         default: cloudpossebot
+      bot-email:
+        description: "Email that will be used for writing new commits"
+        type: string
+        required: false
     secrets:
       workflow-token:
         description: "Token with `workflows` permission, for use in `github_format.sh` and PR creation steps"

@@ -10,7 +10,7 @@ output=$(git diff --name-only)
 if [ -n "$output" ]; then
   echo "Changes detected. Pushing to the PR branch"
   git config --global user.name "${BOT_NAME}"
-  git config --global user.email "11232728+${BOT_NAME}@users.noreply.github.com"
+  git config --global user.email "${BOT_EMAIL}"
   rm .build-harness
   rm -r docs/
   git add -A -- ':!'"${IGNORE_PATH}"''

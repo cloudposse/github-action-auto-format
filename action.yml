@@ -15,10 +15,27 @@ inputs:
     description: "username that will be used for writing new commits"
     required: false
     default: cloudpossebot
+  bot-email:
+    decription: "Email to write commits under"
+    required: false
 
 runs:
   using: "composite"
   steps:
+    # Set bot-email input to dynamic default value, if needed
+    - name: "Construct bot-email from inputs.bot-name if inputs.bot-email not provided"
+      id: bot-email-set
+      shell: bash
+      run: |
+        if [ -z ${{ inputs.bot-email }} ]; then
+          bot_id=$(curl -sSL 'https://api.github.com/users/${{ inputs.bot-name }}' | jq .id)
+          bot_email=${bot_id}+${{ inputs.bot-name }}@users.noreply.github.com
+        else
+          bot_email=${{ inputs.bot-email }}
+        fi
+        echo $bot_email
+        echo "::set-output name=bot-email::${bot_email}"
+
     # Checkout repo
     - name: "Checkout commit"
       uses: actions/checkout@v2
@@ -46,6 +63,7 @@ runs:
         HOST_REPO: ${{ github.repository }}
         EVENT_TYPE: ${{ github.event_name }}
         BOT_NAME: ${{ inputs.bot-name }}
+        BOT_EMAIL: ${{ inputs.bot-email }}
 
     # Cleanup checked out action files, since the pull request will add and commit all files indiscriminately
     - name: "Clean up github-action-auto-format repo"
