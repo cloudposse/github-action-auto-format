@@ -9,22 +9,13 @@ on:
 jobs:
   auto-format:
     # only run on pull requests so long as they don't come from forks
-    #if: ${{ !( (github.event_name == 'pull_request') && (github.event.pull_request.head.repo.full_name != github.repository) ) }}
-    #runs-on: ubuntu-latest
-
-    # Delete "format-task:" lines as desired to limit the scope of the overall auto-formatting task.
-    #strategy:
-    #  matrix:
-    #    include:
-    #      - format-task: "readme"
-    #      - format-task: "github"
-    #      - format-task: "terraform"
+    if: ${{ !( (github.event_name == 'pull_request') && (github.event.pull_request.head.repo.full_name != github.repository) ) }}
+    runs-on: ubuntu-latest
 
     uses: cloudposse/github-action-auto-format/.github/workflows/auto-format-reusable.yml@review-branch
     with:
+      # Delete "format-tasks:" values as desired to limit the scope of the overall auto-formatting task.
       format-tasks: "[\"readme\", \"github\", \"terraform\"]"
-      #format-task: readme
-      #format-task: ${{ matrix.format-task }}
       bot-name: cloudpossebot
     secrets:
       workflow-token: ${{ secrets.TOKEN_WITH_WORKFLOWS_PERMISSION }}

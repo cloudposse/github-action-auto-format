@@ -27,19 +27,13 @@ jobs:
     if: ${{ !( (github.event_name == 'pull_request') && (github.event.pull_request.head.repo.full_name != github.repository) ) }}
     runs-on: ubuntu-latest
 
-    # Delete "format-task:" lines as desired to limit the scope of the overall auto-formatting task.
     strategy:
       matrix:
         format-task: ${{ fromJson(inputs.format-tasks) }}
-#        include:
-#          - format-task: "readme"
-#          - format-task: "github"
-#          - format-task: "terraform"
 
     steps:
     - uses: cloudposse/github-action-auto-format@review-branch
       with:
         format-task: ${{ matrix.format-task }}
         workflow-token: ${{ secrets.workflow-token }}
-        #workflow-token: ${{ secrets.TOKEN_WITH_WORKFLOWS_PERMISSION }}
         bot-name: ${{ inputs.bot-name }}
