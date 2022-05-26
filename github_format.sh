@@ -9,14 +9,41 @@ cd gha_tmp_dir
 git clone https://github.com/cloudposse/.github
 
 git config --global --add safe.directory /github/workspace
-# if this is the cloudposse/github-action-auto-format repository, don't copy the version of auto-format.yml from cloudposse/.github - it should be different
+
+## Deal with each workflow in cloudposse/.github/.github/workflows separately:
+
+# auto-context.yml
+# only Terraform repos should get this workflow
+if [ $(git ls-files | grep .tf$ | wc -l) -gt 0 ]; then
+  cp ./.github/.github/workflows/auto-context.yml ../.github/workflows/
+fi
+
+## auto-format.yml
+# if this is the cloudposse/github-action-auto-format repository, don't copy the version of auto-format.yml from cloudposse/.github during testing
 if [[ "$(git config --get remote.origin.url)" =~ cloudposse\/github-action-auto-format ]]; then
   rm ./.github/.github/workflows/auto-format.yml
 else
   echo "$(git config --get remote.origin.url)"
 fi
+# all repos should get this workflow
+cp ./.github/.github/workflows/auto-format.yml ../.github/workflows/
 
-cp ./.github/.github/workflows/*.yml ../.github/workflows/
+# auto-release.yml
+# all repos should get this workflow
+cp ./.github/.github/workflows/auto-release.yml ../.github/workflows/
+
+# ci-terraform.yml
+# only repos with Terraform files shuld get this workflow
+if [ $(git ls-files | grep .tf$ | wc -l) -gt 0 ]; then
+  cp ./.github/.github/workflows/auto-context.yml ../.github/workflows/
+fi
+
+## validate-codeowners.yml
+# all repos should get this workflow
+cp ./.github/.github/workflows/validate-codeowners.yml ../.github/workflows/
+
+
+
 cd ..
 rm -rf ./gha_tmp_dir
 
