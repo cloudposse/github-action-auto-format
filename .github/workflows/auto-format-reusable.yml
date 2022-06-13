@@ -17,7 +17,7 @@ on:
         required: false
         default: cloudpossebot
       bot-email:
-        description: "Email that will be used for writing new commits"
+        description: "Email address associated with the GitHub user for writing new commits"
         type: string
         required: false
     secrets:
