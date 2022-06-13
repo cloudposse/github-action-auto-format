@@ -80,7 +80,7 @@ examples: |-
 quickstart: |-
   Here's how to get started...
   1. Copy `.github/workflows/auto-format.yml` to the corresponding folder in your target repo.
-  2. Generate a Personal Access Token (PAT) that has the `workflow` permission *using an account that has at least `write` permissions in the target repo* by following the directions [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) and selecting the `workflow` tick box on the token creation screen, if you don't have one already.
+  2. Generate a Personal Access Token (PAT) that with the `workflow` permission *using a GitHub account that has  `write` permissions in the target repo* by following the directions [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) and selecting the `workflow` tick box on the token creation screen.
   3. Add this token as a secret to your target repository and replace the default token name in the `workflow-token:` input of the `github-action-auto-format` step to the name of your token.
   4. Change the `bot-name:` input of the `github-action-auto-format` step to the name of the user who generated the token in step 2. *This user must have at least `write` permissions in hte target repo.`
   5. The default setting for the Auto-format GitHub Action to execute all of its functionality when run. If you'd like to use a subset of the full functionality, modify the `script-names:` input of the `github-action-auto-format` step as detailed in the [usage](#usage) section.
