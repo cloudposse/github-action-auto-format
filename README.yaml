@@ -74,7 +74,7 @@ usage: |-
 # Example usage
 examples: |-
   Here's a real world example:
-  - [`github-action-auto-format`](https://github.com/cloudposse/github-action-auto-format/.githu/workflows/auto-format.yml/) - Cloud Posse's self-testing Auto-format GitHub Action
+  - [`github-action-auto-format`](https://github.com/cloudposse/github-action-auto-format/.github/workflows/auto-format.yml) - Cloud Posse's self-testing Auto-Format GitHub Action
 
 # How to get started quickly
 quickstart: |-
