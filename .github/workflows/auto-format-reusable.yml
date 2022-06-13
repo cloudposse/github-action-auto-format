@@ -12,7 +12,7 @@ on:
         type: string
         required: true
       bot-name:
-        description: "Username that will be used for writing new commits"
+        description: "GitHub username for writing new commits"
         type: string
         required: false
         default: cloudpossebot
