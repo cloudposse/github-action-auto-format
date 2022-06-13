@@ -56,7 +56,7 @@ references:
 
 # Short description of this project
 description: |-
-  Github Action Auto-format runs several repository "hygiene"-related tasks for repositories:
+  Github Action Auto-Format runs several repository "hygiene" tasks for repositories:
   - The `readme` target will rebuild `README.md` from `README.yaml`.
   - The `github_format` target adds all of Cloud Posse's standard repository housekeeping files (including GitHub Actions workflows) to the repository's `.github` folder.
   - The `terraform_format` target ensures consistent formatting across all Terraform files in the repository.
