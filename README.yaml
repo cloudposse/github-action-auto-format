@@ -32,7 +32,7 @@ badges:
     url: "https://slack.cloudposse.com"
 
 related:
-  - name: "GitHub Action Auto-release"
+  - name: "GitHub Action Auto-Release"
     description: "Automatically draft release notes for a new release when merges are made into the default branch"
     url: "https://github.com/cloudposse/github-action-auto-release"
   - name: "GitHub Action Terraform Auto-context"
