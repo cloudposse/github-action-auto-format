@@ -22,7 +22,7 @@ on:
         required: false
     secrets:
       workflow-token:
-        description: "Token with `workflows` permission, for use in `github_format.sh` and PR creation steps"
+        description: "GitHub Token for use in `github_format.sh` and PR creation steps. This token must be granted `workflows` permissions."
         required: true
 
 jobs:
