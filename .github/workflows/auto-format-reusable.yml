@@ -3,7 +3,7 @@ on:
   workflow_call:
     inputs:
       actions-files-checkout-path:
-        description: 'The path on the github-runner to checkout the auto-format action scripts to at runtime'
+        description: 'The path on the github-runner where the auto-format action scripts are checked out at runtime'
         type: string
         default: github-action-auto-format
         required: false
