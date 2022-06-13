@@ -2,7 +2,7 @@ name: "github-action-auto-format"
 description: "Run auto-formatting functionality for different aspects of a repo. (See scripts for details.)"
 inputs:
   actions-files-checkout-path:
-    description: 'The path to checkout the action scripts to at runtime'
+    description: 'The path action scripts are checked out to at runtime'
     default: github-action-auto-format
     required: false
   format-task:
