@@ -8,10 +8,12 @@ on:
 
 jobs:
   auto-format:
+    # For development reasons, this action is pinned to the `main` branch.
+    # However, we recommend that you choose a specific release to pin to.
+    # Consult https://github.com/cloudposse/github-action-auto-format/releases for a list of available releases.
+
     # only run on pull requests so long as they don't come from forks
     if: ${{ !( (github.event_name == 'pull_request') && (github.event.pull_request.head.repo.full_name != github.repository) ) }}
-    #runs-on: ubuntu-latest
-
     uses: cloudposse/github-action-auto-format/.github/workflows/auto-format-reusable.yml@review-branch
     with:
       # Delete "format-tasks:" values as desired to limit the scope of the overall auto-formatting task.
