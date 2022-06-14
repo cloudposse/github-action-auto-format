@@ -1,0 +1,95 @@
+name: "github-action-auto-format"
+description: "Run auto-formatting functionality for different aspects of a repo. (See scripts for details.)"
+inputs:
+  actions-files-checkout-path:
+    description: 'The path on the github-runner where the auto-format action scripts are checked out at runtime'
+    default: github-action-auto-format
+    required: false
+  bot-name:
+    description: "GitHub username for writing new commits"
+    required: false
+    default: cloudpossebot
+  bot-email:
+    description: "Email address associated with the GitHub user for writing new commits"
+    required: false
+  format-task:
+    description: "Name of formatting task to execute. (Options include: readme, github, and terraform.)"
+    required: true
+  workflow-token:
+    description: "GitHub Token for use in `github_format.sh` and PR creation steps. This token must be granted `workflows` permissions."
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    # Set bot-email input to dynamic default value, if needed
+    - name: "Construct bot-email from inputs.bot-name if inputs.bot-email not provided"
+      id: bot-email-set
+      shell: bash
+      run: |
+        if [ -z ${{ inputs.bot-email }} ]; then
+          bot_id=$(curl -sSL 'https://api.github.com/users/${{ inputs.bot-name }}' | jq .id)
+          bot_email=${bot_id}+${{ inputs.bot-name }}@users.noreply.github.com
+        else
+          bot_email=${{ inputs.bot-email }}
+        fi
+        echo $bot_email
+        echo "::set-output name=bot-email::${bot_email}"
+
+    # Checkout repo
+    - name: "Checkout commit"
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.ref }}
+        token: ${{ inputs.workflow-token }}
+
+    # Assets that are checked out as part of an action are not mounted into subsequent container steps.
+    # Therefore, we need to checkout the action code within the workdir to access it within the container steps.
+    - name: "Checkout github-action-auto-format repo to load script locally on runner"
+      uses: actions/checkout@v2
+      with:
+        repository: cloudposse/github-action-auto-format
+        path: ${{ inputs.actions-files-checkout-path }}
+
+    # readme: Rebuild README.md and commit changes (if any) to the PR branch
+    # github: Add and commit standard .github files to the PR branch
+    # terrform: Format Terraform files and commit changes (if any) to the PR branch
+    - name: "Carry out requested formatting"
+      uses: docker://cloudposse/build-harness:latest
+      with:
+        entrypoint: /github/workspace/${{ inputs.actions-files-checkout-path }}/${{ inputs.format-task }}_format.sh
+      env:
+        IGNORE_PATH: ${{ inputs.actions-files-checkout-path }}
+        HOST_REPO: ${{ github.repository }}
+        EVENT_TYPE: ${{ github.event_name }}
+        BOT_NAME: ${{ inputs.bot-name }}
+        BOT_EMAIL: ${{ inputs.bot-email }}
+
+    # Cleanup checked out action files, since the pull request will add and commit all files indiscriminately
+    - name: "Clean up github-action-auto-format repo"
+      shell: bash
+      run: |
+        rm -r ${{ inputs.actions-files-checkout-path }}
+
+    # If triggered by a pull request, push all committed changes
+    - name: "Push to pre-existing PR branch"
+      if: github.event_name != 'schedule' && github.event_name != 'workflow_dispatch'
+      shell: bash
+      run: |
+        # Prevent looping by not pushing changes in response to changes from cloudpossebot
+        [[ "${{ github.event.sender.login }}" ==  "${{ inputs.bot-name }}" ]] || git push
+
+    # If triggered by cron event or manually, create pull request for any committed changes
+    - name: "Create pull request and PR branch"
+      if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+      uses: peter-evans/create-pull-request@v4
+      with:
+        token: ${{ inputs.workflow-token }}
+        commit-message: Auto-format functionality (readme, .github files, and terraform formatting)
+        title: Scheduled Auto-format
+        body: |-
+          This auto-generated PR could do any combination of the following - updating `README.md` based on changes to `README.yaml`,
+          adding standard files from the `cloudposse/.github` repo to this repo's `.github` folder, and ensuring that the formatting
+          of all Terraform files present in the repo is uniform.
+        labels: automated pr
+        branch: github-action-auto-format

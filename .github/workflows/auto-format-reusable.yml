@@ -1,0 +1,43 @@
+name: "auto-format-reusable"
+on:
+  workflow_call:
+    inputs:
+      actions-files-checkout-path:
+        description: 'The path on the github-runner where the auto-format action scripts are checked out at runtime'
+        type: string
+        default: github-action-auto-format
+        required: false
+      format-tasks:
+        description: "Names of formatting tasks to execute. (Options include: readme, github, and terraform.)"
+        type: string
+        required: true
+      bot-name:
+        description: "GitHub username for writing new commits"
+        type: string
+        required: false
+        default: cloudpossebot
+      bot-email:
+        description: "Email address associated with the GitHub user for writing new commits"
+        type: string
+        required: false
+    secrets:
+      workflow-token:
+        description: "GitHub Token for use in `github_format.sh` and PR creation steps. This token must be granted `workflows` permissions."
+        required: true
+
+jobs:
+  auto-format:
+    # only run on pull requests so long as they don't come from forks
+    if: ${{ !( (github.event_name == 'pull_request') && (github.event.pull_request.head.repo.full_name != github.repository) ) }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        format-task: ${{ fromJson(inputs.format-tasks) }}
+
+    steps:
+    - uses: cloudposse/github-action-auto-format@review-branch
+      with:
+        format-task: ${{ matrix.format-task }}
+        workflow-token: ${{ secrets.workflow-token }}
+        bot-name: ${{ inputs.bot-name }}
