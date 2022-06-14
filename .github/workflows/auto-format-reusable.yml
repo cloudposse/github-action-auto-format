@@ -36,7 +36,7 @@ jobs:
         format-task: ${{ fromJson(inputs.format-tasks) }}
 
     steps:
-    - uses: cloudposse/github-action-auto-format@review-branch
+    - uses: cloudposse/github-action-auto-format@main
       with:
         format-task: ${{ matrix.format-task }}
         workflow-token: ${{ secrets.workflow-token }}
