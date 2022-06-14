@@ -83,7 +83,8 @@ Here's how to get started...
 3. Add this token as a GitHub secret in your target repository and set the `workflow-token` input of the `github-action-auto-format` step to the name of your secret.
 4. Set the `bot-name` input of the `github-action-auto-format` step to the GitHub username of the user who generated the token in step 2. *This user must have `write` permissions in the target repo.`
 5. By default, the Auto-Format GitHub Action will execute all of its scripts when run. If you'd like to use a subset of the full functionality, modify the `script-names` input of the `github-action-auto-format` step as described in the [usage](#usage) section.
-6. Optional - You may want to change when the scheduled cron trigger is executed. If you'd like a guide, here's a useful resource for help in crafting cron strings: https://crontab.guru/
+6. (Optional) You may want to change when the scheduled cron trigger is executed. If you'd like a guide, here's a useful resource for help in crafting cron strings - https://crontab.guru/
+7. (Optional) CloudPosse recommends pinning to specific versions of actions for ease of long-term maintenance. If you care to edit the pin in `auto-format.yml` from `main` to a specific version, feel free to consult https://github.com/cloudposse/github-action-auto-format/releases for a list of available versions.
 
 
 ## Examples
