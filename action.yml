@@ -2,22 +2,22 @@ name: "github-action-auto-format"
 description: "Run auto-formatting functionality for different aspects of a repo. (See scripts for details.)"
 inputs:
   actions-files-checkout-path:
-    description: 'The path action scripts are checked out to at runtime'
+    description: 'The path on the github-runner where the auto-format action scripts are checked out at runtime'
     default: github-action-auto-format
+    required: false
+  bot-name:
+    description: "GitHub username for writing new commits"
+    required: false
+    default: cloudpossebot
+  bot-email:
+    description: "Email address associated with the GitHub user for writing new commits"
     required: false
   format-task:
     description: "Name of formatting task to execute. (Options include: readme, github, and terraform.)"
     required: true
   workflow-token:
-    description: "token with `workflows` permission, for use in `github_format.sh` and PR creation steps"
+    description: "GitHub Token for use in `github_format.sh` and PR creation steps. This token must be granted `workflows` permissions."
     required: true
-  bot-name:
-    description: "username that will be used for writing new commits"
-    required: false
-    default: cloudpossebot
-  bot-email:
-    decription: "Email to write commits under"
-    required: false
 
 runs:
   using: "composite"

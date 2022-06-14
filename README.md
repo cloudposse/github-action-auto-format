@@ -1,6 +1,6 @@
 
 <!-- markdownlint-disable -->
-# GitHub Action Auto-format [![Build Status](https://github.com/cloudposse/build-harness/workflows/docker/badge.svg?branch=master)](https://github.com/cloudposse/build-harness/actions?query=workflow%3Adocker) [![Latest Release](https://img.shields.io/github/release/cloudposse/build-harness.svg)](https://github.com/cloudposse/build-harness/releases/latest) [![Slack Community](https://slack.cloudposse.com/badge.svg)](https://slack.cloudposse.com)
+# GitHub Action Auto-Format [![Build Status](https://github.com/cloudposse/build-harness/workflows/docker/badge.svg?branch=master)](https://github.com/cloudposse/build-harness/actions?query=workflow%3Adocker) [![Latest Release](https://img.shields.io/github/release/cloudposse/build-harness.svg)](https://github.com/cloudposse/build-harness/releases/latest) [![Slack Community](https://slack.cloudposse.com/badge.svg)](https://slack.cloudposse.com)
 <!-- markdownlint-restore -->
 
 [![README Header][readme_header_img]][readme_header_link]
@@ -28,7 +28,7 @@
 
 -->
 
-Github Action Auto-format runs several repository "hygiene"-related tasks for repositories:
+Github Action Auto-Format runs several repository "hygiene" tasks for repositories:
 - The `readme` target will rebuild `README.md` from `README.yaml`.
 - The `github_format` target adds all of Cloud Posse's standard repository housekeeping files (including GitHub Actions workflows) to the repository's `.github` folder.
 - The `terraform_format` target ensures consistent formatting across all Terraform files in the repository.
@@ -79,17 +79,17 @@ If you're using the `auto-format.yml` workflow file distributed within this repo
 
 Here's how to get started...
 1. Copy `.github/workflows/auto-format.yml` to the corresponding folder in your target repo.
-2. Generate a Personal Access Token (PAT) that has the `workflow` permission *using an account that has at least `write` permissions in the target repo* by following the directions [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) and selecting the `workflow` tick box on the token creation screen, if you don't have one already.
-3. Add this token as a secret to your target repository and replace the default token name in the `workflow-token:` input of the `github-action-auto-format` step to the name of your token.
-4. Change the `bot-name:` input of the `github-action-auto-format` step to the name of the user who generated the token in step 2. *This user must have at least `write` permissions in hte target repo.`
-5. The default setting for the Auto-format GitHub Action to execute all of its functionality when run. If you'd like to use a subset of the full functionality, modify the `script-names:` input of the `github-action-auto-format` step as detailed in the [usage](#usage) section.
+2. Generate a Personal Access Token (PAT) that with the `workflow` permission *using a GitHub account that has  `write` permissions in the target repo* by following the directions [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) and selecting the `workflow` tick box on the token creation screen.
+3. Add this token as a GitHub secret in your target repository and set the `workflow-token` input of the `github-action-auto-format` step to the name of your secret.
+4. Set the `bot-name` input of the `github-action-auto-format` step to the GitHub username of the user who generated the token in step 2. *This user must have `write` permissions in the target repo.`
+5. By default, the Auto-Format GitHub Action will execute all of its scripts when run. If you'd like to use a subset of the full functionality, modify the `script-names` input of the `github-action-auto-format` step as described in the [usage](#usage) section.
 6. Optional - You may want to change when the scheduled cron trigger is executed. If you'd like a guide, here's a useful resource for help in crafting cron strings: https://crontab.guru/
 
 
 ## Examples
 
 Here's a real world example:
-- [`github-action-auto-format`](https://github.com/cloudposse/github-action-auto-format/.githu/workflows/auto-format.yml/) - Cloud Posse's self-testing Auto-format GitHub Action
+- [`github-action-auto-format`](https://github.com/cloudposse/github-action-auto-format/.github/workflows/auto-format.yml) - Cloud Posse's self-testing Auto-Format GitHub Action
 
 
 
@@ -107,7 +107,7 @@ Are you using this project or any of our other projects? Consider [leaving a tes
 
 Check out these related projects.
 
-- [GitHub Action Auto-release](https://github.com/cloudposse/github-action-auto-release) - Automatically draft release notes for a new release when merges are made into the default branch
+- [GitHub Action Auto-Release](https://github.com/cloudposse/github-action-auto-release) - Automatically draft release notes for a new release when merges are made into the default branch
 - [GitHub Action Terraform Auto-context](https://github.com/cloudposse/github-action-terraform-auto-context) - Automatically update `context.tf` whenever a new version becomes available
 - [GitHub Action Terraform CI](https://github.com/cloudposse/github-action-terraform-ci) - Full suite of Terraform CI actions, along with chatops support
 - [GitHub Action Validate CODEOWNERS](https://github.com/cloudposse/github-action-validate-codeowners) - Validate and lint contents of CODEOWNERS file
@@ -286,10 +286,10 @@ Check out [our other projects][github], [follow us on twitter][twitter], [apply 
   [readme_footer_link]: https://cloudposse.com/readme/footer/link?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/github-action-auto-format&utm_content=readme_footer_link
   [readme_commercial_support_img]: https://cloudposse.com/readme/commercial-support/img
   [readme_commercial_support_link]: https://cloudposse.com/readme/commercial-support/link?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/github-action-auto-format&utm_content=readme_commercial_support_link
-  [share_twitter]: https://twitter.com/intent/tweet/?text=GitHub+Action+Auto-format&url=https://github.com/cloudposse/github-action-auto-format
-  [share_linkedin]: https://www.linkedin.com/shareArticle?mini=true&title=GitHub+Action+Auto-format&url=https://github.com/cloudposse/github-action-auto-format
+  [share_twitter]: https://twitter.com/intent/tweet/?text=GitHub+Action+Auto-Format&url=https://github.com/cloudposse/github-action-auto-format
+  [share_linkedin]: https://www.linkedin.com/shareArticle?mini=true&title=GitHub+Action+Auto-Format&url=https://github.com/cloudposse/github-action-auto-format
   [share_reddit]: https://reddit.com/submit/?url=https://github.com/cloudposse/github-action-auto-format
   [share_facebook]: https://facebook.com/sharer/sharer.php?u=https://github.com/cloudposse/github-action-auto-format
   [share_googleplus]: https://plus.google.com/share?url=https://github.com/cloudposse/github-action-auto-format
-  [share_email]: mailto:?subject=GitHub+Action+Auto-format&body=https://github.com/cloudposse/github-action-auto-format
+  [share_email]: mailto:?subject=GitHub+Action+Auto-Format&body=https://github.com/cloudposse/github-action-auto-format
   [beacon]: https://ga-beacon.cloudposse.com/UA-76589703-4/cloudposse/github-action-auto-format?pixel&cs=github&cm=readme&an=github-action-auto-format

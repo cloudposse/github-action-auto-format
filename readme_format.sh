@@ -4,7 +4,9 @@ make BUILD_HARNESS_PATH=/build-harness PACKAGES_PREFER_HOST=true -f /build-harne
 
 set -x
 
-# The `readme` build-harness target leaves some files lying around after it finishes. Since we might be running other targets after this, in separate GitHub Action steps, we don't want to leave these files lying there, waiting to return some permission error or something. That's why they get deleted, whether there were changes to `README.md` or not.
+# The `readme` build-harness target leaves some files lying around after it finishes. Since we might be running other
+# targets after this, in separate GitHub Action steps, we don't want to leave these files lying there, waiting to return
+# some permission error or something. That's why they get deleted, whether there were changes to `README.md` or not.
 
 output=$(git diff --name-only)
 if [ -n "$output" ]; then
