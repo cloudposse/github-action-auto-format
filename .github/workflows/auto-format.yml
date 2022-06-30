@@ -1,6 +1,7 @@
 name: "auto-format"
 on:
-  pull_request_target:
+  #pull_request_target:
+  pull_request:
     types: [opened, synchronize]
   schedule:
     - cron: '0 7 * * *'
