@@ -14,7 +14,7 @@ jobs:
 
     # only run on pull requests so long as they don't come from forks
     if: ${{ !( (github.event_name == 'pull_request') && (github.event.pull_request.head.repo.full_name != github.repository) ) }}
-    uses: cloudposse/github-action-auto-format/.github/workflows/auto-format-reusable.yml@review-branch
+    uses: cloudposse/github-action-auto-format/.github/workflows/auto-format-reusable.yml@main
     with:
       # Delete "format-tasks:" values as desired to limit the scope of the overall auto-formatting task.
       format-tasks: "[\"readme\", \"github\", \"terraform\"]"
