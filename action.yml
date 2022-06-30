@@ -79,17 +79,23 @@ runs:
         # Prevent looping by not pushing changes in response to changes from cloudpossebot
         [[ "${{ github.event.sender.login }}" ==  "${{ inputs.bot-name }}" ]] || git push
 
+    # Set PR parameters for soon-to-be-opened PR
+    - name: "Set PR parameters"
+      id: pr-parameters
+      if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+      shell: bash
+      run: |
+        # run script
+        "/github/workspace/${{ inputs.actions-files-checkout-path }}/scripts/${{ inputs.format-task }}/pr_parameters.sh"
+
     # If triggered by cron event or manually, create pull request for any committed changes
     - name: "Create pull request and PR branch"
       if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
       uses: peter-evans/create-pull-request@v4
       with:
         token: ${{ inputs.workflow-token }}
-        commit-message: Auto-format functionality (readme, .github files, terraform formatting, and context.tf updating)
+        commit-message: ${{ steps.pr-parameters.outputs.pr-commit-message }}
         title: Scheduled Auto-format
-        body: |-
-          This auto-generated PR could do any combination of the following - updating `README.md` based on changes to `README.yaml`,
-          adding standard files from the `cloudposse/.github` repo to this repo's `.github` folder, and ensuring that the formatting
-          of all Terraform files present in the repo is uniform.
+        body: ${{ steps.pr-parameters.outputs.pr-body }}
         labels: automated pr
         branch: github-action-auto-format
