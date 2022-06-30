@@ -11,12 +11,6 @@ git clone https://github.com/cloudposse/.github
 
 ## Deal with each workflow in cloudposse/.github/.github/workflows separately:
 
-# auto-context.yml
-# only Terraform repos should get this workflow
-if [ "$(git ls-files | grep .tf$ | wc -l)" -gt 0 ]; then
-  cp ./.github/.github/workflows/auto-context.yml ../.github/workflows/
-fi
-
 ## auto-format.yml
 # if this is the cloudposse/github-action-auto-format repository, don't copy the version of auto-format.yml from cloudposse/.github during testing
 if [[ "$(git config --get remote.origin.url)" =~ cloudposse\/github-action-auto-format ]]; then
