@@ -1,13 +1,14 @@
 #!/bin/bash
 
+TEST_FOLDER="./scripts/terraform/test/"
 if [[ "$HOST_REPO" == "cloudposse/github-action-auto-format" ]]; then
-  mv ./test/*.tf .
+  mv ${TEST_FOLDER}*.tf .
 fi
 
 make BUILD_HARNESS_PATH=/build-harness PACKAGES_PREFER_HOST=true -f /build-harness/templates/Makefile.build-harness terraform/fmt
 
 if [[ "$HOST_REPO" == "cloudposse/github-action-auto-format" ]]; then
-  mv ./*.tf ./test/
+  mv ./*.tf ${TEST_FOLDER}
 fi
 
 set -x
