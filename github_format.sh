@@ -4,11 +4,10 @@ set -x
 
 echo "Copying workflows from cloudposse/.github repo"
 
+# Copy cloudposse/.github repo in order to clone workflows
 mkdir gha_tmp_dir
 cd gha_tmp_dir || exit 1
 git clone https://github.com/cloudposse/.github
-
-git config --global --add safe.directory /github/workspace
 
 ## Deal with each workflow in cloudposse/.github/.github/workflows separately:
 
@@ -42,14 +41,12 @@ fi
 # all repos should get this workflow
 cp ./.github/.github/workflows/validate-codeowners.yml ../.github/workflows/
 
+# Remove local copy of cloudposse/.github repo
 cd ..
 rm -rf ./gha_tmp_dir
 
-git config --local user.name "${BOT_NAME}"
-git config --local user.email "${BOT_EMAIL}"
-git add ./.github/workflows/*
-
 # Don't try committing without any files staged. That returns a non-zero exit code.
+git add ./.github/workflows/*
 if ! git diff --staged --exit-code; then
   git commit -m "Adding .github files"
 fi

@@ -1,11 +1,10 @@
 #!/bin/bash
 
-if [[ "$HOST_REPO" == "cloudposse/github-action-terraform-auto-context" ]]; then
+if [[ "$HOST_REPO" == "cloudposse/github-action-terraform-auto-format" ]]; then
   mv ./test/context.tf .
   echo "Moved context.tf to top-level directory."
 fi
 
-git config --global --add safe.directory /github/workspace
 if [[ -f context.tf ]]; then
   echo "Discovered existing context.tf!"
   echo "Checking for pre-existing ${BRANCH_NAME} branch."
