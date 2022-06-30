@@ -97,5 +97,5 @@ runs:
         commit-message: ${{ steps.pr-parameters.outputs.pr-commit-message }}
         title: Scheduled Auto-format
         body: ${{ steps.pr-parameters.outputs.pr-body }}
-        labels: automated pr
+        labels: ${{ steps.pr-parameters.outputs.pr-labels }}
         branch: github-action-auto-format
