@@ -59,7 +59,7 @@ runs:
     - name: "Carry out requested formatting"
       uses: docker://cloudposse/build-harness:latest
       with:
-        entrypoint: /github/workspace/${{ inputs.actions-files-checkout-path }}/${{ inputs.format-task }}_format.sh
+        entrypoint: /github/workspace/${{ inputs.actions-files-checkout-path }}/scripts/${{ inputs.format-task }}/format.sh
       env:
         IGNORE_PATH: ${{ inputs.actions-files-checkout-path }}
         HOST_REPO: ${{ github.repository }}
