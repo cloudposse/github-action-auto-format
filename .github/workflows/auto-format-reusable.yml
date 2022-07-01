@@ -8,7 +8,7 @@ on:
         default: github-action-auto-format
         required: false
       format-tasks:
-        description: "Names of formatting tasks to execute. (Options include: readme, github, and terraform.)"
+        description: "Names of formatting tasks to execute. (Options include: readme, github, terraform, and context.)"
         type: string
         required: true
       bot-name:

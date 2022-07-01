@@ -13,7 +13,7 @@ inputs:
     description: "Email address associated with the GitHub user for writing new commits"
     required: false
   format-task:
-    description: "Name of formatting task to execute. (Options include: readme, github, and terraform.)"
+    description: "Name of formatting task to execute. (Options include: readme, github, terraform, and context.)"
     required: true
   workflow-token:
     description: "GitHub Token for use in `github_format.sh` and PR creation steps. This token must be granted `workflows` permissions."
