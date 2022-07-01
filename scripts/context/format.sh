@@ -1,10 +1,5 @@
 #!/bin/bash
-
-TEST_FOLDER="./scripts/context/test/"
-if [[ "$HOST_REPO" == "cloudposse/github-action-terraform-auto-format" ]]; then
-  mv ${TEST_FOLDER}context.tf .
-  echo "Moved context.tf to top-level directory."
-fi
+# format.sh
 
 if [[ -f context.tf ]]; then
   echo "Discovered existing context.tf!"
@@ -28,9 +23,4 @@ if [[ -f context.tf ]]; then
   fi
 else
   echo "This module has not yet been updated to support the context.tf pattern! Please update in order to support automatic updates."
-fi
-
-if [[ "$HOST_REPO" == "cloudposse/github-action-terraform-auto-context" ]]; then
-  mv context.tf ${TEST_FOLDER}
-  echo "Moved context.tf back to ./test/ directory."
 fi

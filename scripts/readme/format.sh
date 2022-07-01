@@ -1,4 +1,5 @@
 #!/bin/bash
+# format.sh
 
 make BUILD_HARNESS_PATH=/build-harness PACKAGES_PREFER_HOST=true -f /build-harness/templates/Makefile.build-harness pr/readme/host
 

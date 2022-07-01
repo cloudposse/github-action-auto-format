@@ -1,4 +1,5 @@
 #!/bin/bash
+# format.sh
 
 set -x
 
@@ -11,13 +12,7 @@ git clone https://github.com/cloudposse/.github
 
 ## Deal with each workflow in cloudposse/.github/.github/workflows separately:
 
-## auto-format.yml
-# if this is the cloudposse/github-action-auto-format repository, don't copy the version of auto-format.yml from cloudposse/.github during testing
-if [[ "$(git config --get remote.origin.url)" =~ cloudposse\/github-action-auto-format ]]; then
-  rm ./.github/.github/workflows/auto-format.yml
-else
-  git config --get remote.origin.url
-fi
+# auto-format.yml
 # all repos should get this workflow
 cp ./.github/.github/workflows/auto-format.yml ../.github/workflows/
 
