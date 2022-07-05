@@ -17,7 +17,8 @@ jobs:
     uses: cloudposse/github-action-auto-format/.github/workflows/auto-format-reusable.yml@main
     with:
       # Delete "format-tasks:" values as desired to limit the scope of the overall auto-formatting task.
-      format-tasks: "[\"readme\", \"github\", \"terraform\", \"context\"]"
+      format-tasks: |
+        ["readme", "github", "terraform", "context"]
       # GitHub username to use for automated commits (should be a real GitHub user)
       bot-name: cloudpossebot
     secrets:
