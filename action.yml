@@ -26,7 +26,7 @@ runs:
     - name: "Git config"
       shell: bash
       run: |
-        #Construct bot-email from inputs.bot-name if inputs.bot-email not provided
+        # Construct bot-email from inputs.bot-name if inputs.bot-email not provided
         bot_id=$(curl -sSL 'https://api.github.com/users/${{ inputs.bot-name }}' | jq .id)
         if [ -z ${{ inputs.bot-email }} ]; then
           bot_email=${bot_id}+${{ inputs.bot-name }}@users.noreply.github.com
@@ -34,7 +34,7 @@ runs:
           bot_email=${{ inputs.bot-email }}
         fi
         # configure git
-        git config --local user.name "${bot_id}"
+        git config --local user.name "${{ inputs.bot-name }}"
         git config --local user.email "${bot_email}"
         git config --global --add safe.directory /github/workspace
 
