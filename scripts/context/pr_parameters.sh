@@ -11,3 +11,7 @@ echo "::set-output name=pr-body::$(echo $PR_BODY)"
 # PR labels
 PR_LABELS="automated pr"
 echo "::set-output name=pr-labels::$(echo $PR_LABELS)"
+
+# PR title
+PR_TITLE="Automated update of context.tf"
+echo "::set-output name=pr-title::$(echo $PR_TITLE)"

@@ -108,7 +108,7 @@ runs:
       with:
         token: ${{ inputs.workflow-token }}
         commit-message: ${{ steps.pr-parameters.outputs.pr-commit-message }}
-        title: Scheduled Auto-format
+        title: ${{ steps.pr-paramters.outputs.pr-title }}
         body: ${{ steps.pr-parameters.outputs.pr-body }}
         labels: ${{ steps.pr-parameters.outputs.pr-labels }}
         branch: github-action-auto-format
