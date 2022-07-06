@@ -2,7 +2,7 @@
 # format.sh
 
 # I had to factor everything into functions and add the if statement at the end to accommodate
-# the source (.) function in ./test/self-test.sh
+# the source (.) function in ./test.sh
 
 terraform_format () {
   make BUILD_HARNESS_PATH=/build-harness PACKAGES_PREFER_HOST=true -f /build-harness/templates/Makefile.build-harness terraform/fmt

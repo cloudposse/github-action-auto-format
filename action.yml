@@ -58,7 +58,7 @@ runs:
       if: contains( github.repository, 'cloudposse/github-action-auto-format')
       uses: docke://cloudposse/build-harness:latest
       with:
-        entrypoint: /github/workspace/${{ inputs.actions-files-checkout-path }}/scripts/${{ inputs.format-task }}/test/self-test.sh
+        entrypoint: /github/workspace/${{ inputs.actions-files-checkout-path }}/scripts/${{ inputs.format-task }}/test.sh
       env:
         IGNORE_PATH: ${{ inputs.actions-files-checkout-path }}
         EVENT_TYPE: ${{ github.event_name }}

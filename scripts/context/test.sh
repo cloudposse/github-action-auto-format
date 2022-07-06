@@ -1,5 +1,5 @@
 #!/bin/bash
-# self-test.sh
+# test.sh
 
 TEST_FOLDER="./scripts/context/test/"
 

@@ -1,4 +1,4 @@
 #!/bin/bash
-# self-test.sh
+# test.sh
 
 $(cwd)/../format.sh
