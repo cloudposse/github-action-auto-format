@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # PR commit-message
-PR_COMMIT_MESSAGE="Auto-format functionality (syncing context.tf with newest remote version)"
+PR_COMMIT_MESSAGE="Automated update of context.tf"
 echo "::set-output name=commit-message::$(echo $PR_COMMIT_MESSAGE)"
 
 # PR body
