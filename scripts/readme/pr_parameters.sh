@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # PR commit-message
-PR_COMMIT_MESSAGE="Auto-format functionality (README updating)"
+PR_COMMIT_MESSAGE="Automated rebuild of README.md"
 echo "::set-output name=commit-message::$(echo $PR_COMMIT_MESSAGE)"
 
 # PR body
