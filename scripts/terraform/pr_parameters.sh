@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # PR commit-message
-PR_COMMIT_MESSAGE="Auto-format functionality (Terraform file linting)"
+PR_COMMIT_MESSAGE="Automated formatting of Terraform files"
 echo "::set-output name=commit-message::$(echo $PR_COMMIT_MESSAGE)"
 
 # PR body
