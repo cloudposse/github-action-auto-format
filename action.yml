@@ -69,7 +69,7 @@ runs:
     # terrform: Format Terraform files and commit changes (if any) to the PR branch
     # context: Ensure that context.tf is up to date and commit new context.tf (if any) to the PR branch
     - name: "Carry out requested formatting"
-      if: !contains( github.repository, 'cloudposse/github-action-auto-format')
+      if: ! contains( github.repository, 'cloudposse/github-action-auto-format')
       uses: docker://cloudposse/build-harness:latest
       with:
         entrypoint: /github/workspace/${{ inputs.actions-files-checkout-path }}/scripts/${{ inputs.format-task }}/format.sh
