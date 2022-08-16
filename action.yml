@@ -55,7 +55,7 @@ runs:
 
     # Run self-tests when calling from cloudposse/github-action-auto-format repo
     - name: "Carry out self-tests"
-      if: contains( github.repository, 'cloudposse/github-action-auto-format')
+      if: ${{ contains( github.repository, 'cloudposse/github-action-auto-format') }}
       uses: docke://cloudposse/build-harness:latest
       with:
         entrypoint: /github/workspace/${{ inputs.actions-files-checkout-path }}/scripts/${{ inputs.format-task }}/test.sh
@@ -69,7 +69,7 @@ runs:
     # terrform: Format Terraform files and commit changes (if any) to the PR branch
     # context: Ensure that context.tf is up to date and commit new context.tf (if any) to the PR branch
     - name: "Carry out requested formatting"
-      if: ! contains( github.repository, 'cloudposse/github-action-auto-format')
+      if: ${{ ! contains( github.repository, 'cloudposse/github-action-auto-format') }}
       uses: docker://cloudposse/build-harness:latest
       with:
         entrypoint: /github/workspace/${{ inputs.actions-files-checkout-path }}/scripts/${{ inputs.format-task }}/format.sh
@@ -86,7 +86,7 @@ runs:
 
     # If triggered by a pull request, push all committed changes
     - name: "Push to pre-existing PR branch"
-      if: github.event_name != 'schedule' && github.event_name != 'workflow_dispatch'
+      if: ${{ github.event_name != 'schedule' && github.event_name != 'workflow_dispatch' }}
       shell: bash
       run: |
         # Prevent looping by not pushing changes in response to changes from cloudpossebot
@@ -95,7 +95,7 @@ runs:
     # Set PR parameters for soon-to-be-opened PR
     - name: "Set PR parameters"
       id: pr-parameters
-      if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+      if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
       shell: bash
       run: |
         # run script
@@ -103,7 +103,7 @@ runs:
 
     # If triggered by cron event or manually, create pull request for any committed changes
     - name: "Create pull request and PR branch"
-      if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+      if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
       uses: peter-evans/create-pull-request@v4
       with:
         token: ${{ inputs.workflow-token }}
