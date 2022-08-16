@@ -37,6 +37,23 @@ runs:
         repository: cloudposse/github-action-auto-format
         path: ${{ inputs.actions-files-checkout-path }}
 
+    # Git config
+    - name: "Git config"
+      if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}    
+      shell: bash
+      run: |
+        # Construct bot-email from inputs.bot-name if inputs.bot-email not provided
+        bot_id=$(curl -sSL 'https://api.github.com/users/${{ inputs.bot-name }}' | jq .id)
+        if [ -z ${{ inputs.bot-email }} ]; then
+          bot_email=${bot_id}+${{ inputs.bot-name }}@users.noreply.github.com
+        else
+          bot_email=${{ inputs.bot-email }}
+        fi
+        # configure git
+        git config --local user.name "${{ inputs.bot-name }}"
+        git config --local user.email "${bot_email}"
+        git config --global --add safe.directory /github/workspace
+
     # Run self-tests when calling from cloudposse/github-action-auto-format repo
     - name: "Carry out self-tests"
       if: ${{ contains( github.repository, 'cloudposse/github-action-auto-format') }}
@@ -84,23 +101,6 @@ runs:
       run: |
         # run script
         "/github/workspace/${{ inputs.actions-files-checkout-path }}/scripts/${{ inputs.format-task }}/pr_parameters.sh"
-
-    # Git config
-    - name: "Git config"
-      if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}    
-      shell: bash
-      run: |
-        # Construct bot-email from inputs.bot-name if inputs.bot-email not provided
-        bot_id=$(curl -sSL 'https://api.github.com/users/${{ inputs.bot-name }}' | jq .id)
-        if [ -z ${{ inputs.bot-email }} ]; then
-          bot_email=${bot_id}+${{ inputs.bot-name }}@users.noreply.github.com
-        else
-          bot_email=${{ inputs.bot-email }}
-        fi
-        # configure git
-        git config --local user.name "${{ inputs.bot-name }}"
-        git config --local user.email "${bot_email}"
-        git config --global --add safe.directory /github/workspace
 
 
     # If triggered by cron event or manually, create pull request for any committed changes
