@@ -56,7 +56,7 @@ runs:
     # Run self-tests when calling from cloudposse/github-action-auto-format repo
     - name: "Carry out self-tests"
       if: ${{ contains( github.repository, 'cloudposse/github-action-auto-format') }}
-      uses: docke://cloudposse/build-harness:latest
+      uses: docker://cloudposse/build-harness:latest
       with:
         entrypoint: /github/workspace/${{ inputs.actions-files-checkout-path }}/scripts/${{ inputs.format-task }}/test.sh
       env:
