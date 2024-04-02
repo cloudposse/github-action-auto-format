@@ -1,4 +1,5 @@
-name: "auto-release"
+name: auto-release
+
 on:
   push:
     branches:
@@ -7,11 +8,8 @@ on:
       - production
 
 jobs:
-  auto-release:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: cloudposse/github-action-auto-release@main
-      with:
-        prerelease: false
-        publish: true
-        token: ${{ secrets.GITHUB_TOKEN }}
+  auto:
+    uses: cloudposse/.github/.github/workflows/shared-auto-release.yml@main
+    with:
+      publish: true
+    secrets: inherit
