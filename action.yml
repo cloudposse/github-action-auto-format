@@ -110,7 +110,7 @@ runs:
       with:
         token: ${{ inputs.workflow-token }}
         commit-message: ${{ steps.pr-parameters.outputs.pr-commit-message }}
-        title: ${{ steps.pr-paramters.outputs.pr-title }}
+        title: ${{ steps.pr-parameters.outputs.pr-title }}
         body: ${{ steps.pr-parameters.outputs.pr-body }}
         labels: ${{ steps.pr-parameters.outputs.pr-labels }}
         branch: github-action-auto-format
