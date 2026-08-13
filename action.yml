@@ -24,7 +24,7 @@ runs:
   steps:
     # Checkout repo
     - name: "Checkout commit"
-      uses: actions/checkout@v2
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
         ref: ${{ github.event.pull_request.head.ref }}
         token: ${{ inputs.workflow-token }}
@@ -32,7 +32,7 @@ runs:
     # Assets that are checked out as part of an action are not mounted into subsequent container steps.
     # Therefore, we need to checkout the action code within the workdir to access it within the container steps.
     - name: "Checkout github-action-auto-format repo to load script locally on runner"
-      uses: actions/checkout@v2
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
         repository: cloudposse/github-action-auto-format
         path: ${{ inputs.actions-files-checkout-path }}
@@ -106,11 +106,11 @@ runs:
     # If triggered by cron event or manually, create pull request for any committed changes
     - name: "Create pull request and PR branch"
       if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
-      uses: peter-evans/create-pull-request@v6
+      uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
       with:
         token: ${{ inputs.workflow-token }}
         commit-message: ${{ steps.pr-parameters.outputs.pr-commit-message }}
-        title: ${{ steps.pr-paramters.outputs.pr-title }}
+        title: ${{ steps.pr-parameters.outputs.pr-title }}
         body: ${{ steps.pr-parameters.outputs.pr-body }}
         labels: ${{ steps.pr-parameters.outputs.pr-labels }}
         branch: github-action-auto-format
